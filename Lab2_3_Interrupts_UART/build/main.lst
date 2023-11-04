@@ -1,0 +1,166 @@
+ARM GAS  /tmp/cc9s6Bal.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.delay,"ax",%progbits
+  18              		.align	1
+  19              		.global	delay
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	delay:
+  25              	.LVL0:
+  26              	.LFB73:
+  27              		.file 1 "Core/Src/main.c"
+   1:Core/Src/main.c **** 
+   2:Core/Src/main.c **** #include <stdbool.h>
+   3:Core/Src/main.c **** #include "main.h"
+   4:Core/Src/main.c **** #include "gpio.h"
+   5:Core/Src/main.c **** 
+   6:Core/Src/main.c **** int main(void)
+   7:Core/Src/main.c **** {
+   8:Core/Src/main.c **** 
+   9:Core/Src/main.c ****   led_init();           //Initializing GPIO port for led
+  10:Core/Src/main.c **** 
+  11:Core/Src/main.c ****   while(true)
+  12:Core/Src/main.c ****   {
+  13:Core/Src/main.c ****     LED_SWAP();
+  14:Core/Src/main.c ****     delay(100000);
+  15:Core/Src/main.c ****   }
+  16:Core/Src/main.c **** 
+  17:Core/Src/main.c **** 
+  18:Core/Src/main.c **** }
+  19:Core/Src/main.c **** 
+  20:Core/Src/main.c **** void delay(uint32_t value)
+  21:Core/Src/main.c **** {
+  28              		.loc 1 21 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 21 1 is_stmt 0 view .LVU1
+  34 0000 82B0     		sub	sp, sp, #8
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  22:Core/Src/main.c ****   for(volatile uint32_t i = 0; i < value; i++);
+ARM GAS  /tmp/cc9s6Bal.s 			page 2
+
+
+  37              		.loc 1 22 3 is_stmt 1 view .LVU2
+  38              	.LBB2:
+  39              		.loc 1 22 7 view .LVU3
+  40              		.loc 1 22 25 is_stmt 0 view .LVU4
+  41 0002 0023     		movs	r3, #0
+  42 0004 0193     		str	r3, [sp, #4]
+  43              		.loc 1 22 3 view .LVU5
+  44 0006 02E0     		b	.L2
+  45              	.L3:
+  46              		.loc 1 22 47 is_stmt 1 discriminator 3 view .LVU6
+  47              		.loc 1 22 43 discriminator 3 view .LVU7
+  48              		.loc 1 22 44 is_stmt 0 discriminator 3 view .LVU8
+  49 0008 019B     		ldr	r3, [sp, #4]
+  50 000a 0133     		adds	r3, r3, #1
+  51 000c 0193     		str	r3, [sp, #4]
+  52              	.L2:
+  53              		.loc 1 22 32 is_stmt 1 discriminator 1 view .LVU9
+  54              		.loc 1 22 34 is_stmt 0 discriminator 1 view .LVU10
+  55 000e 019B     		ldr	r3, [sp, #4]
+  56              		.loc 1 22 3 discriminator 1 view .LVU11
+  57 0010 8342     		cmp	r3, r0
+  58 0012 F9D3     		bcc	.L3
+  59              	.LBE2:
+  23:Core/Src/main.c **** }...
+  60              		.loc 1 23 1 view .LVU12
+  61 0014 02B0     		add	sp, sp, #8
+  62              	.LCFI1:
+  63              		.cfi_def_cfa_offset 0
+  64              		@ sp needed
+  65 0016 7047     		bx	lr
+  66              		.cfi_endproc
+  67              	.LFE73:
+  69              		.section	.text.main,"ax",%progbits
+  70              		.align	1
+  71              		.global	main
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	main:
+  77              	.LFB72:
+   7:Core/Src/main.c **** {
+  78              		.loc 1 7 1 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ Volatile: function does not return.
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0000 08B5     		push	{r3, lr}
+  84              	.LCFI2:
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 3, -8
+  87              		.cfi_offset 14, -4
+   9:Core/Src/main.c ****   led_init();           //Initializing GPIO port for led
+  88              		.loc 1 9 3 view .LVU14
+  89 0002 FFF7FEFF 		bl	led_init
+  90              	.LVL1:
+  91              	.L6:
+  11:Core/Src/main.c ****   while(true)
+ARM GAS  /tmp/cc9s6Bal.s 			page 3
+
+
+  92              		.loc 1 11 3 discriminator 1 view .LVU15
+  13:Core/Src/main.c ****     LED_SWAP();
+  93              		.loc 1 13 5 discriminator 1 view .LVU16
+  94 0006 044A     		ldr	r2, .L8
+  95 0008 5369     		ldr	r3, [r2, #20]
+  96 000a 83F08003 		eor	r3, r3, #128
+  97 000e 5361     		str	r3, [r2, #20]
+  13:Core/Src/main.c ****     LED_SWAP();
+  98              		.loc 1 13 15 discriminator 1 view .LVU17
+  14:Core/Src/main.c ****     delay(100000);
+  99              		.loc 1 14 5 discriminator 1 view .LVU18
+ 100 0010 0248     		ldr	r0, .L8+4
+ 101 0012 FFF7FEFF 		bl	delay
+ 102              	.LVL2:
+  11:Core/Src/main.c ****   while(true)
+ 103              		.loc 1 11 8 discriminator 1 view .LVU19
+ 104 0016 F6E7     		b	.L6
+ 105              	.L9:
+ 106              		.align	2
+ 107              	.L8:
+ 108 0018 00040240 		.word	1073873920
+ 109 001c A0860100 		.word	100000
+ 110              		.cfi_endproc
+ 111              	.LFE72:
+ 113              		.text
+ 114              	.Letext0:
+ 115              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+ 116              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+ 117              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+ 118              		.file 5 "Core/Inc/gpio.h"
+ARM GAS  /tmp/cc9s6Bal.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/cc9s6Bal.s:18     .text.delay:0000000000000000 $t
+     /tmp/cc9s6Bal.s:24     .text.delay:0000000000000000 delay
+     /tmp/cc9s6Bal.s:70     .text.main:0000000000000000 $t
+     /tmp/cc9s6Bal.s:76     .text.main:0000000000000000 main
+     /tmp/cc9s6Bal.s:108    .text.main:0000000000000018 $d
+
+UNDEFINED SYMBOLS
+led_init
