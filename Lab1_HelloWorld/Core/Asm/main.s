@@ -11,7 +11,7 @@
 
 SystemInit:
 
-    bx lr  // Return
+    bx lr  //  Return
 
 RCC_Init:
 

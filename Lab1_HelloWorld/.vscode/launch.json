@@ -14,12 +14,12 @@
             "interface": "swd",
             "serialNumber": "", 
             "runToEntryPoint": "main",
-            "svdFile": "/home/seradya/Documents/STM32_Projects/SVD/cmsis-svd-master/data/STMicro/STM32L15xC.svd",
+            "svdFile": "../Configs/SVD/STM32L15xC.svd",
             "preLaunchTask": "build",
             "showDevDebugOutput": "raw",
             "configFiles": [
-                "/home/seradya/Documents/STM32_Projects/OpenOCD/openocd-master/tcl/interface/jlink.cfg",
-                "/home/seradya/Documents/STM32_Projects/OpenOCD/openocd-master/tcl/target/stm32l1.cfg"
+                "../OpenOCD/interface/jlink.cfg",
+                "../OpenOCD/target/stm32l1.cfg"
             ]
             
         }
