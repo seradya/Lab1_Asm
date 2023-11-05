@@ -1,0 +1,76 @@
+ARM GAS  /tmp/ccaGCM1Y.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"it.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.TIM2_IRQHandler,"ax",%progbits
+  18              		.align	1
+  19              		.global	TIM2_IRQHandler
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	TIM2_IRQHandler:
+  25              	.LFB72:
+  26              		.file 1 "Core/Src/it.c"
+   1:Core/Src/it.c **** 
+   2:Core/Src/it.c **** #include "stm32l1xx.h"
+   3:Core/Src/it.c **** #include "it.h"
+   4:Core/Src/it.c **** #include "gpio.h"
+   5:Core/Src/it.c **** 
+   6:Core/Src/it.c **** void TIM2_IRQHandler(void)
+   7:Core/Src/it.c **** {
+  27              		.loc 1 7 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+   8:Core/Src/it.c ****     TIM2->SR &= ~TIM_SR_UIF;
+  32              		.loc 1 8 5 view .LVU1
+  33              		.loc 1 8 14 is_stmt 0 view .LVU2
+  34 0000 4FF08042 		mov	r2, #1073741824
+  35 0004 1369     		ldr	r3, [r2, #16]
+  36 0006 23F00103 		bic	r3, r3, #1
+  37 000a 1361     		str	r3, [r2, #16]
+   9:Core/Src/it.c ****     LED_SWAP();
+  38              		.loc 1 9 5 is_stmt 1 view .LVU3
+  39 000c 02F50132 		add	r2, r2, #132096
+  40 0010 5369     		ldr	r3, [r2, #20]
+  41 0012 83F08003 		eor	r3, r3, #128
+  42 0016 5361     		str	r3, [r2, #20]
+  43              		.loc 1 9 15 view .LVU4
+  10:Core/Src/it.c **** }...
+  44              		.loc 1 10 1 is_stmt 0 view .LVU5
+  45 0018 7047     		bx	lr
+  46              		.cfi_endproc
+  47              	.LFE72:
+  49              		.text
+ARM GAS  /tmp/ccaGCM1Y.s 			page 2
+
+
+  50              	.Letext0:
+  51              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+  52              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+  53              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+ARM GAS  /tmp/ccaGCM1Y.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 it.c
+     /tmp/ccaGCM1Y.s:18     .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/ccaGCM1Y.s:24     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+
+NO UNDEFINED SYMBOLS
