@@ -39,16 +39,37 @@ void ExecuteCommand(void)
   {
     strcpy(TxBuffer,"BMSTU, IU4, Lab3");
   }
+
   else if(strncmp(RxBuffer, "Start", 5) == 0)
   {
     TIM2->CR1 |= TIM_CR1_CEN;
     strcpy(TxBuffer,"Ok, start");
   }
+
   else if(strncmp(RxBuffer, "Stop", 4) == 0)
   {
     TIM2->CR1 &= ~TIM_CR1_CEN;
     strcpy(TxBuffer,"Ok, stop");
   }
+
+  else if(strncmp(RxBuffer, "Period", 6) == 0)
+  {
+    //Period 1000
+    uint16_t tmp;
+    sscanf(RxBuffer, "%*s %hu", &tmp);
+    if((tmp >= 100) && (tmp <= 5000))
+    {
+      TIM2->ARR = tmp - 1;
+      TIM2->CNT = 0;
+      strcpy(TxBuffer,"Ok, period is set");
+    }
+    else
+    {
+      strcpy(TxBuffer,"Period out of range!");
+    }
+    
+  }
+
   else
   {
     strcpy(TxBuffer,"Unknown command!");

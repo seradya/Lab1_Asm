@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccPL9oOW.s 			page 1
+ARM GAS  /tmp/ccMXfvXU.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -49,23 +49,45 @@ ARM GAS  /tmp/ccPL9oOW.s 			page 1
   35      00
   36 0041 000000   		.align	2
   37              	.LC6:
-  38 0044 556E6B6E 		.ascii	"Unknown command!\000"
-  38      6F776E20 
-  38      636F6D6D 
-  38      616E6421 
-  38      00
-  39              		.section	.text.ExecuteCommand,"ax",%progbits
-  40              		.align	1
-  41              		.global	ExecuteCommand
-  42              		.syntax unified
-ARM GAS  /tmp/ccPL9oOW.s 			page 2
+  38 0044 50657269 		.ascii	"Period\000"
+  38      6F6400
+  39 004b 00       		.align	2
+  40              	.LC7:
+  41 004c 252A7320 		.ascii	"%*s %hu\000"
+  41      25687500 
+  42              		.align	2
+  43              	.LC8:
+  44 0054 4F6B2C20 		.ascii	"Ok, period is set\000"
+ARM GAS  /tmp/ccMXfvXU.s 			page 2
 
 
-  43              		.thumb
-  44              		.thumb_func
-  46              	ExecuteCommand:
-  47              	.LFB73:
-  48              		.file 1 "Core/Src/main.c"
+  44      70657269 
+  44      6F642069 
+  44      73207365 
+  44      7400
+  45 0066 0000     		.align	2
+  46              	.LC9:
+  47 0068 50657269 		.ascii	"Period out of range!\000"
+  47      6F64206F 
+  47      7574206F 
+  47      66207261 
+  47      6E676521 
+  48 007d 000000   		.align	2
+  49              	.LC10:
+  50 0080 556E6B6E 		.ascii	"Unknown command!\000"
+  50      6F776E20 
+  50      636F6D6D 
+  50      616E6421 
+  50      00
+  51              		.section	.text.ExecuteCommand,"ax",%progbits
+  52              		.align	1
+  53              		.global	ExecuteCommand
+  54              		.syntax unified
+  55              		.thumb
+  56              		.thumb_func
+  58              	ExecuteCommand:
+  59              	.LFB73:
+  60              		.file 1 "Core/Src/main.c"
    1:Core/Src/main.c **** 
    2:Core/Src/main.c **** #include <string.h>
    3:Core/Src/main.c **** #include <stdbool.h>
@@ -96,367 +118,473 @@ ARM GAS  /tmp/ccPL9oOW.s 			page 1
   28:Core/Src/main.c ****     }
   29:Core/Src/main.c ****   }
   30:Core/Src/main.c **** 
+ARM GAS  /tmp/ccMXfvXU.s 			page 3
+
+
   31:Core/Src/main.c **** 
   32:Core/Src/main.c **** }
   33:Core/Src/main.c **** 
   34:Core/Src/main.c **** void ExecuteCommand(void)
   35:Core/Src/main.c **** {
-  49              		.loc 1 35 1 view -0
-  50              		.cfi_startproc
-  51              		@ args = 0, pretend = 0, frame = 0
-  52              		@ frame_needed = 0, uses_anonymous_args = 0
-  53 0000 38B5     		push	{r3, r4, r5, lr}
-  54              	.LCFI0:
-  55              		.cfi_def_cfa_offset 16
-  56              		.cfi_offset 3, -16
-  57              		.cfi_offset 4, -12
-  58              		.cfi_offset 5, -8
-  59              		.cfi_offset 14, -4
+  61              		.loc 1 35 1 view -0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 8
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 0000 30B5     		push	{r4, r5, lr}
+  66              	.LCFI0:
+  67              		.cfi_def_cfa_offset 12
+  68              		.cfi_offset 4, -12
+  69              		.cfi_offset 5, -8
+  70              		.cfi_offset 14, -4
+  71 0002 83B0     		sub	sp, sp, #12
+  72              	.LCFI1:
+  73              		.cfi_def_cfa_offset 24
   36:Core/Src/main.c ****   CommandRecieved = false;
-  60              		.loc 1 36 3 view .LVU1
-  61              		.loc 1 36 19 is_stmt 0 view .LVU2
-  62 0002 264B     		ldr	r3, .L9
-  63 0004 0022     		movs	r2, #0
-  64 0006 1A70     		strb	r2, [r3]
-ARM GAS  /tmp/ccPL9oOW.s 			page 3
-
-
+  74              		.loc 1 36 3 view .LVU1
+  75              		.loc 1 36 19 is_stmt 0 view .LVU2
+  76 0004 3D4B     		ldr	r3, .L13
+  77 0006 0022     		movs	r2, #0
+  78 0008 1A70     		strb	r2, [r3]
   37:Core/Src/main.c **** 
   38:Core/Src/main.c ****   if(strncmp(RxBuffer, "*IDN?", 5) == 0)
-  65              		.loc 1 38 3 is_stmt 1 view .LVU3
-  66              		.loc 1 38 6 is_stmt 0 view .LVU4
-  67 0008 0522     		movs	r2, #5
-  68 000a 2549     		ldr	r1, .L9+4
-  69 000c 2548     		ldr	r0, .L9+8
-  70 000e FFF7FEFF 		bl	strncmp
-  71              	.LVL0:
-  72              		.loc 1 38 5 view .LVU5
-  73 0012 C0B1     		cbz	r0, .L7
+  79              		.loc 1 38 3 is_stmt 1 view .LVU3
+  80              		.loc 1 38 6 is_stmt 0 view .LVU4
+  81 000a 0522     		movs	r2, #5
+  82 000c 3C49     		ldr	r1, .L13+4
+  83 000e 3D48     		ldr	r0, .L13+8
+  84 0010 FFF7FEFF 		bl	strncmp
+  85              	.LVL0:
+  86              		.loc 1 38 5 view .LVU5
+  87 0014 0028     		cmp	r0, #0
+  88 0016 30D0     		beq	.L10
   39:Core/Src/main.c ****   {
   40:Core/Src/main.c ****     strcpy(TxBuffer,"BMSTU, IU4, Lab3");
   41:Core/Src/main.c ****   }
-  42:Core/Src/main.c ****   else if(strncmp(RxBuffer, "Start", 5) == 0)
-  74              		.loc 1 42 8 is_stmt 1 view .LVU6
-  75              		.loc 1 42 11 is_stmt 0 view .LVU7
-  76 0014 0522     		movs	r2, #5
-  77 0016 2449     		ldr	r1, .L9+12
-  78 0018 2248     		ldr	r0, .L9+8
-  79 001a FFF7FEFF 		bl	strncmp
-  80              	.LVL1:
-  81              		.loc 1 42 10 view .LVU8
-  82 001e 48B3     		cbz	r0, .L8
-  43:Core/Src/main.c ****   {
-  44:Core/Src/main.c ****     TIM2->CR1 |= TIM_CR1_CEN;
-  45:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
-  46:Core/Src/main.c ****   }
-  47:Core/Src/main.c ****   else if(strncmp(RxBuffer, "Stop", 4) == 0)
-  83              		.loc 1 47 8 is_stmt 1 view .LVU9
-  84              		.loc 1 47 11 is_stmt 0 view .LVU10
-  85 0020 0422     		movs	r2, #4
-  86 0022 2249     		ldr	r1, .L9+16
-  87 0024 1F48     		ldr	r0, .L9+8
-  88 0026 FFF7FEFF 		bl	strncmp
-  89              	.LVL2:
-  90              		.loc 1 47 10 view .LVU11
-  91 002a 0028     		cmp	r0, #0
-  92 002c 2ED1     		bne	.L5
-  48:Core/Src/main.c ****   {
-  49:Core/Src/main.c ****     TIM2->CR1 &= ~TIM_CR1_CEN;
-  93              		.loc 1 49 5 is_stmt 1 view .LVU12
-  94              		.loc 1 49 15 is_stmt 0 view .LVU13
-  95 002e 4FF08042 		mov	r2, #1073741824
-  96 0032 1368     		ldr	r3, [r2]
-  97 0034 23F00103 		bic	r3, r3, #1
-  98 0038 1360     		str	r3, [r2]
-  50:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, stop");
-  99              		.loc 1 50 5 is_stmt 1 view .LVU14
- 100 003a 1D4A     		ldr	r2, .L9+20
- 101 003c 1D4B     		ldr	r3, .L9+24
- 102 003e 07CA     		ldm	r2, {r0, r1, r2}
- 103 0040 03C3     		stmia	r3!, {r0, r1}
- 104 0042 1A70     		strb	r2, [r3]
- 105 0044 05E0     		b	.L3
- 106              	.L7:
-  40:Core/Src/main.c ****   }
-ARM GAS  /tmp/ccPL9oOW.s 			page 4
+  42:Core/Src/main.c **** 
+  43:Core/Src/main.c ****   else if(strncmp(RxBuffer, "Start", 5) == 0)
+  89              		.loc 1 43 8 is_stmt 1 view .LVU6
+  90              		.loc 1 43 11 is_stmt 0 view .LVU7
+  91 0018 0522     		movs	r2, #5
+  92 001a 3B49     		ldr	r1, .L13+12
+  93 001c 3948     		ldr	r0, .L13+8
+  94 001e FFF7FEFF 		bl	strncmp
+  95              	.LVL1:
+  96              		.loc 1 43 10 view .LVU8
+  97 0022 0028     		cmp	r0, #0
+  98 0024 41D0     		beq	.L11
+  44:Core/Src/main.c ****   {
+  45:Core/Src/main.c ****     TIM2->CR1 |= TIM_CR1_CEN;
+  46:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
+  47:Core/Src/main.c ****   }
+  48:Core/Src/main.c **** 
+  49:Core/Src/main.c ****   else if(strncmp(RxBuffer, "Stop", 4) == 0)
+ARM GAS  /tmp/ccMXfvXU.s 			page 4
 
 
- 107              		.loc 1 40 5 view .LVU15
- 108 0046 1B4C     		ldr	r4, .L9+24
- 109 0048 1B4D     		ldr	r5, .L9+28
- 110 004a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 111 004c 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 112 004e 2B68     		ldr	r3, [r5]
- 113 0050 2370     		strb	r3, [r4]
- 114              	.L3:
-  51:Core/Src/main.c ****   }
-  52:Core/Src/main.c ****   else
-  53:Core/Src/main.c ****   {
-  54:Core/Src/main.c ****     strcpy(TxBuffer,"Unknown command!");
-  55:Core/Src/main.c ****   }
-  56:Core/Src/main.c **** 
-  57:Core/Src/main.c **** 
-  58:Core/Src/main.c ****   SendString(TxBuffer);
- 115              		.loc 1 58 3 view .LVU16
- 116 0052 184C     		ldr	r4, .L9+24
- 117 0054 2046     		mov	r0, r4
- 118 0056 FFF7FEFF 		bl	SendString
- 119              	.LVL3:
-  59:Core/Src/main.c ****   memset(RxBuffer,0,256);
- 120              		.loc 1 59 3 view .LVU17
- 121 005a 4FF48075 		mov	r5, #256
- 122 005e 2A46     		mov	r2, r5
- 123 0060 0021     		movs	r1, #0
- 124 0062 1048     		ldr	r0, .L9+8
- 125 0064 FFF7FEFF 		bl	memset
+  99              		.loc 1 49 8 is_stmt 1 view .LVU9
+ 100              		.loc 1 49 11 is_stmt 0 view .LVU10
+ 101 0026 0422     		movs	r2, #4
+ 102 0028 3849     		ldr	r1, .L13+16
+ 103 002a 3648     		ldr	r0, .L13+8
+ 104 002c FFF7FEFF 		bl	strncmp
+ 105              	.LVL2:
+ 106              		.loc 1 49 10 view .LVU11
+ 107 0030 0028     		cmp	r0, #0
+ 108 0032 46D0     		beq	.L12
+  50:Core/Src/main.c ****   {
+  51:Core/Src/main.c ****     TIM2->CR1 &= ~TIM_CR1_CEN;
+  52:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, stop");
+  53:Core/Src/main.c ****   }
+  54:Core/Src/main.c **** 
+  55:Core/Src/main.c ****   else if(strncmp(RxBuffer, "Period", 6) == 0)
+ 109              		.loc 1 55 8 is_stmt 1 view .LVU12
+ 110              		.loc 1 55 11 is_stmt 0 view .LVU13
+ 111 0034 0622     		movs	r2, #6
+ 112 0036 3649     		ldr	r1, .L13+20
+ 113 0038 3248     		ldr	r0, .L13+8
+ 114 003a FFF7FEFF 		bl	strncmp
+ 115              	.LVL3:
+ 116              		.loc 1 55 10 view .LVU14
+ 117 003e 0028     		cmp	r0, #0
+ 118 0040 55D1     		bne	.L6
+ 119              	.LBB2:
+  56:Core/Src/main.c ****   {
+  57:Core/Src/main.c ****     //Period 1000
+  58:Core/Src/main.c ****     uint16_t tmp;
+ 120              		.loc 1 58 5 is_stmt 1 view .LVU15
+  59:Core/Src/main.c ****     sscanf(RxBuffer, "%*s %hu", &tmp);
+ 121              		.loc 1 59 5 view .LVU16
+ 122 0042 0DF10602 		add	r2, sp, #6
+ 123 0046 3349     		ldr	r1, .L13+24
+ 124 0048 2E48     		ldr	r0, .L13+8
+ 125 004a FFF7FEFF 		bl	sscanf
  126              	.LVL4:
-  60:Core/Src/main.c ****   memset(TxBuffer,0,256);
- 127              		.loc 1 60 3 view .LVU18
- 128 0068 2A46     		mov	r2, r5
- 129 006a 0021     		movs	r1, #0
- 130 006c 2046     		mov	r0, r4
- 131 006e FFF7FEFF 		bl	memset
- 132              	.LVL5:
-  61:Core/Src/main.c **** }
- 133              		.loc 1 61 1 is_stmt 0 view .LVU19
- 134 0072 38BD     		pop	{r3, r4, r5, pc}
- 135              	.L8:
-  44:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
- 136              		.loc 1 44 5 is_stmt 1 view .LVU20
-  44:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
- 137              		.loc 1 44 15 is_stmt 0 view .LVU21
- 138 0074 4FF08042 		mov	r2, #1073741824
- 139 0078 1368     		ldr	r3, [r2]
- 140 007a 43F00103 		orr	r3, r3, #1
- 141 007e 1360     		str	r3, [r2]
-  45:Core/Src/main.c ****   }
- 142              		.loc 1 45 5 is_stmt 1 view .LVU22
- 143 0080 0E4A     		ldr	r2, .L9+32
- 144 0082 0C4B     		ldr	r3, .L9+24
- 145 0084 07CA     		ldm	r2, {r0, r1, r2}
- 146 0086 03C3     		stmia	r3!, {r0, r1}
- 147 0088 1A80     		strh	r2, [r3]	@ movhi
- 148 008a E2E7     		b	.L3
- 149              	.L5:
-ARM GAS  /tmp/ccPL9oOW.s 			page 5
+  60:Core/Src/main.c ****     if((tmp >= 100) && (tmp <= 5000))
+ 127              		.loc 1 60 5 view .LVU17
+ 128              		.loc 1 60 21 is_stmt 0 view .LVU18
+ 129 004e BDF80620 		ldrh	r2, [sp, #6]
+ 130 0052 A2F16403 		sub	r3, r2, #100
+ 131 0056 9BB2     		uxth	r3, r3
+ 132              		.loc 1 60 7 view .LVU19
+ 133 0058 41F22431 		movw	r1, #4900
+ 134 005c 8B42     		cmp	r3, r1
+ 135 005e 3CD8     		bhi	.L7
+  61:Core/Src/main.c ****     {
+  62:Core/Src/main.c ****       TIM2->ARR = tmp - 1;
+ 136              		.loc 1 62 7 is_stmt 1 view .LVU20
+ 137              		.loc 1 62 23 is_stmt 0 view .LVU21
+ 138 0060 013A     		subs	r2, r2, #1
+ 139              		.loc 1 62 17 view .LVU22
+ 140 0062 4FF08043 		mov	r3, #1073741824
+ 141 0066 DA62     		str	r2, [r3, #44]
+  63:Core/Src/main.c ****       TIM2->CNT = 0;
+ARM GAS  /tmp/ccMXfvXU.s 			page 5
 
 
-  54:Core/Src/main.c ****   }
- 150              		.loc 1 54 5 view .LVU23
- 151 008c 094C     		ldr	r4, .L9+24
- 152 008e 0C4D     		ldr	r5, .L9+36
- 153 0090 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 154 0092 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 155 0094 2B68     		ldr	r3, [r5]
- 156 0096 2370     		strb	r3, [r4]
- 157 0098 DBE7     		b	.L3
- 158              	.L10:
- 159 009a 00BF     		.align	2
- 160              	.L9:
- 161 009c 00000000 		.word	.LANCHOR0
- 162 00a0 00000000 		.word	.LC0
- 163 00a4 00000000 		.word	.LANCHOR1
- 164 00a8 1C000000 		.word	.LC2
- 165 00ac 30000000 		.word	.LC4
- 166 00b0 38000000 		.word	.LC5
- 167 00b4 00000000 		.word	.LANCHOR2
- 168 00b8 08000000 		.word	.LC1
- 169 00bc 24000000 		.word	.LC3
- 170 00c0 44000000 		.word	.LC6
- 171              		.cfi_endproc
- 172              	.LFE73:
- 174              		.section	.text.main,"ax",%progbits
- 175              		.align	1
- 176              		.global	main
- 177              		.syntax unified
- 178              		.thumb
- 179              		.thumb_func
- 181              	main:
- 182              	.LFB72:
+ 142              		.loc 1 63 7 is_stmt 1 view .LVU23
+ 143              		.loc 1 63 17 is_stmt 0 view .LVU24
+ 144 0068 0022     		movs	r2, #0
+ 145 006a 5A62     		str	r2, [r3, #36]
+  64:Core/Src/main.c ****       strcpy(TxBuffer,"Ok, period is set");
+ 146              		.loc 1 64 7 is_stmt 1 view .LVU25
+ 147 006c 2A4C     		ldr	r4, .L13+28
+ 148 006e 2B4D     		ldr	r5, .L13+32
+ 149 0070 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 150 0072 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 151 0074 2B68     		ldr	r3, [r5]
+ 152 0076 2380     		strh	r3, [r4]	@ movhi
+ 153 0078 05E0     		b	.L3
+ 154              	.L10:
+ 155              	.LBE2:
+  40:Core/Src/main.c ****   }
+ 156              		.loc 1 40 5 view .LVU26
+ 157 007a 274C     		ldr	r4, .L13+28
+ 158 007c 284D     		ldr	r5, .L13+36
+ 159 007e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 160 0080 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 161 0082 2B68     		ldr	r3, [r5]
+ 162 0084 2370     		strb	r3, [r4]
+ 163              	.L3:
+  65:Core/Src/main.c ****     }
+  66:Core/Src/main.c ****     else
+  67:Core/Src/main.c ****     {
+  68:Core/Src/main.c ****       strcpy(TxBuffer,"Period out of range!");
+  69:Core/Src/main.c ****     }
+  70:Core/Src/main.c ****     
+  71:Core/Src/main.c ****   }
+  72:Core/Src/main.c **** 
+  73:Core/Src/main.c ****   else
+  74:Core/Src/main.c ****   {
+  75:Core/Src/main.c ****     strcpy(TxBuffer,"Unknown command!");
+  76:Core/Src/main.c ****   }
+  77:Core/Src/main.c **** 
+  78:Core/Src/main.c **** 
+  79:Core/Src/main.c ****   SendString(TxBuffer);
+ 164              		.loc 1 79 3 view .LVU27
+ 165 0086 244C     		ldr	r4, .L13+28
+ 166 0088 2046     		mov	r0, r4
+ 167 008a FFF7FEFF 		bl	SendString
+ 168              	.LVL5:
+  80:Core/Src/main.c ****   memset(RxBuffer,0,256);
+ 169              		.loc 1 80 3 view .LVU28
+ 170 008e 4FF48075 		mov	r5, #256
+ 171 0092 2A46     		mov	r2, r5
+ 172 0094 0021     		movs	r1, #0
+ 173 0096 1B48     		ldr	r0, .L13+8
+ 174 0098 FFF7FEFF 		bl	memset
+ 175              	.LVL6:
+  81:Core/Src/main.c ****   memset(TxBuffer,0,256);
+ 176              		.loc 1 81 3 view .LVU29
+ 177 009c 2A46     		mov	r2, r5
+ 178 009e 0021     		movs	r1, #0
+ 179 00a0 2046     		mov	r0, r4
+ARM GAS  /tmp/ccMXfvXU.s 			page 6
+
+
+ 180 00a2 FFF7FEFF 		bl	memset
+ 181              	.LVL7:
+  82:Core/Src/main.c **** }
+ 182              		.loc 1 82 1 is_stmt 0 view .LVU30
+ 183 00a6 03B0     		add	sp, sp, #12
+ 184              	.LCFI2:
+ 185              		.cfi_remember_state
+ 186              		.cfi_def_cfa_offset 12
+ 187              		@ sp needed
+ 188 00a8 30BD     		pop	{r4, r5, pc}
+ 189              	.L11:
+ 190              	.LCFI3:
+ 191              		.cfi_restore_state
+  45:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
+ 192              		.loc 1 45 5 is_stmt 1 view .LVU31
+  45:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, start");
+ 193              		.loc 1 45 15 is_stmt 0 view .LVU32
+ 194 00aa 4FF08042 		mov	r2, #1073741824
+ 195 00ae 1368     		ldr	r3, [r2]
+ 196 00b0 43F00103 		orr	r3, r3, #1
+ 197 00b4 1360     		str	r3, [r2]
+  46:Core/Src/main.c ****   }
+ 198              		.loc 1 46 5 is_stmt 1 view .LVU33
+ 199 00b6 1B4A     		ldr	r2, .L13+40
+ 200 00b8 174B     		ldr	r3, .L13+28
+ 201 00ba 07CA     		ldm	r2, {r0, r1, r2}
+ 202 00bc 03C3     		stmia	r3!, {r0, r1}
+ 203 00be 1A80     		strh	r2, [r3]	@ movhi
+ 204 00c0 E1E7     		b	.L3
+ 205              	.L12:
+  51:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, stop");
+ 206              		.loc 1 51 5 view .LVU34
+  51:Core/Src/main.c ****     strcpy(TxBuffer,"Ok, stop");
+ 207              		.loc 1 51 15 is_stmt 0 view .LVU35
+ 208 00c2 4FF08042 		mov	r2, #1073741824
+ 209 00c6 1368     		ldr	r3, [r2]
+ 210 00c8 23F00103 		bic	r3, r3, #1
+ 211 00cc 1360     		str	r3, [r2]
+  52:Core/Src/main.c ****   }
+ 212              		.loc 1 52 5 is_stmt 1 view .LVU36
+ 213 00ce 164A     		ldr	r2, .L13+44
+ 214 00d0 114B     		ldr	r3, .L13+28
+ 215 00d2 07CA     		ldm	r2, {r0, r1, r2}
+ 216 00d4 03C3     		stmia	r3!, {r0, r1}
+ 217 00d6 1A70     		strb	r2, [r3]
+ 218 00d8 D5E7     		b	.L3
+ 219              	.L7:
+ 220              	.LBB3:
+  68:Core/Src/main.c ****     }
+ 221              		.loc 1 68 7 view .LVU37
+ 222 00da 0F4C     		ldr	r4, .L13+28
+ 223 00dc 134D     		ldr	r5, .L13+48
+ 224 00de 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 225 00e0 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 226 00e2 95E80300 		ldm	r5, {r0, r1}
+ 227 00e6 44F8040B 		str	r0, [r4], #4
+ 228 00ea 2170     		strb	r1, [r4]
+ARM GAS  /tmp/ccMXfvXU.s 			page 7
+
+
+ 229 00ec CBE7     		b	.L3
+ 230              	.L6:
+ 231              	.LBE3:
+  75:Core/Src/main.c ****   }
+ 232              		.loc 1 75 5 view .LVU38
+ 233 00ee 0A4C     		ldr	r4, .L13+28
+ 234 00f0 0F4D     		ldr	r5, .L13+52
+ 235 00f2 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 236 00f4 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 237 00f6 2B68     		ldr	r3, [r5]
+ 238 00f8 2370     		strb	r3, [r4]
+ 239 00fa C4E7     		b	.L3
+ 240              	.L14:
+ 241              		.align	2
+ 242              	.L13:
+ 243 00fc 00000000 		.word	.LANCHOR0
+ 244 0100 00000000 		.word	.LC0
+ 245 0104 00000000 		.word	.LANCHOR1
+ 246 0108 1C000000 		.word	.LC2
+ 247 010c 30000000 		.word	.LC4
+ 248 0110 44000000 		.word	.LC6
+ 249 0114 4C000000 		.word	.LC7
+ 250 0118 00000000 		.word	.LANCHOR2
+ 251 011c 54000000 		.word	.LC8
+ 252 0120 08000000 		.word	.LC1
+ 253 0124 24000000 		.word	.LC3
+ 254 0128 38000000 		.word	.LC5
+ 255 012c 68000000 		.word	.LC9
+ 256 0130 80000000 		.word	.LC10
+ 257              		.cfi_endproc
+ 258              	.LFE73:
+ 260              		.section	.text.main,"ax",%progbits
+ 261              		.align	1
+ 262              		.global	main
+ 263              		.syntax unified
+ 264              		.thumb
+ 265              		.thumb_func
+ 267              	main:
+ 268              	.LFB72:
   14:Core/Src/main.c **** 
- 183              		.loc 1 14 1 view -0
- 184              		.cfi_startproc
- 185              		@ Volatile: function does not return.
- 186              		@ args = 0, pretend = 0, frame = 0
- 187              		@ frame_needed = 0, uses_anonymous_args = 0
- 188 0000 08B5     		push	{r3, lr}
- 189              	.LCFI1:
- 190              		.cfi_def_cfa_offset 8
- 191              		.cfi_offset 3, -8
- 192              		.cfi_offset 14, -4
+ 269              		.loc 1 14 1 view -0
+ 270              		.cfi_startproc
+ 271              		@ Volatile: function does not return.
+ 272              		@ args = 0, pretend = 0, frame = 0
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274 0000 08B5     		push	{r3, lr}
+ 275              	.LCFI4:
+ 276              		.cfi_def_cfa_offset 8
+ 277              		.cfi_offset 3, -8
+ 278              		.cfi_offset 14, -4
   16:Core/Src/main.c ****   sysclk_init();        //System clock initializing 
- 193              		.loc 1 16 3 view .LVU25
- 194 0002 4FF48072 		mov	r2, #256
- 195 0006 0021     		movs	r1, #0
- 196 0008 0948     		ldr	r0, .L15
- 197 000a FFF7FEFF 		bl	memset
- 198              	.LVL6:
+ 279              		.loc 1 16 3 view .LVU40
+ 280 0002 4FF48072 		mov	r2, #256
+ 281 0006 0021     		movs	r1, #0
+ 282 0008 0948     		ldr	r0, .L19
+ 283 000a FFF7FEFF 		bl	memset
+ 284              	.LVL8:
+ARM GAS  /tmp/ccMXfvXU.s 			page 8
+
+
   17:Core/Src/main.c ****   led_init();           //Initializing GPIO port for led
- 199              		.loc 1 17 3 view .LVU26
- 200 000e FFF7FEFF 		bl	sysclk_init
- 201              	.LVL7:
+ 285              		.loc 1 17 3 view .LVU41
+ 286 000e FFF7FEFF 		bl	sysclk_init
+ 287              	.LVL9:
   18:Core/Src/main.c ****   tim2_init();          //initializing TIM2
- 202              		.loc 1 18 3 view .LVU27
- 203 0012 FFF7FEFF 		bl	led_init
-ARM GAS  /tmp/ccPL9oOW.s 			page 6
-
-
- 204              	.LVL8:
+ 288              		.loc 1 18 3 view .LVU42
+ 289 0012 FFF7FEFF 		bl	led_init
+ 290              	.LVL10:
   19:Core/Src/main.c ****   btn_init();           //User button initializingd
- 205              		.loc 1 19 3 view .LVU28
- 206 0016 FFF7FEFF 		bl	tim2_init
- 207              	.LVL9:
+ 291              		.loc 1 19 3 view .LVU43
+ 292 0016 FFF7FEFF 		bl	tim2_init
+ 293              	.LVL11:
   20:Core/Src/main.c ****   usart_init();         //USART2 initialization
- 208              		.loc 1 20 3 view .LVU29
- 209 001a FFF7FEFF 		bl	btn_init
- 210              	.LVL10:
+ 294              		.loc 1 20 3 view .LVU44
+ 295 001a FFF7FEFF 		bl	btn_init
+ 296              	.LVL12:
   21:Core/Src/main.c **** 
- 211              		.loc 1 21 3 view .LVU30
- 212 001e FFF7FEFF 		bl	usart_init
- 213              	.LVL11:
- 214              	.L12:
+ 297              		.loc 1 21 3 view .LVU45
+ 298 001e FFF7FEFF 		bl	usart_init
+ 299              	.LVL13:
+ 300              	.L16:
   23:Core/Src/main.c ****   {
- 215              		.loc 1 23 3 view .LVU31
+ 301              		.loc 1 23 3 view .LVU46
   25:Core/Src/main.c ****     {
- 216              		.loc 1 25 5 view .LVU32
+ 302              		.loc 1 25 5 view .LVU47
   25:Core/Src/main.c ****     {
- 217              		.loc 1 25 8 is_stmt 0 view .LVU33
- 218 0022 044B     		ldr	r3, .L15+4
- 219 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 303              		.loc 1 25 8 is_stmt 0 view .LVU48
+ 304 0022 044B     		ldr	r3, .L19+4
+ 305 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
   25:Core/Src/main.c ****     {
- 220              		.loc 1 25 7 view .LVU34
- 221 0026 002B     		cmp	r3, #0
- 222 0028 FBD0     		beq	.L12
+ 306              		.loc 1 25 7 view .LVU49
+ 307 0026 002B     		cmp	r3, #0
+ 308 0028 FBD0     		beq	.L16
   27:Core/Src/main.c ****     }
- 223              		.loc 1 27 7 is_stmt 1 view .LVU35
- 224 002a FFF7FEFF 		bl	ExecuteCommand
- 225              	.LVL12:
- 226 002e F8E7     		b	.L12
- 227              	.L16:
- 228              		.align	2
- 229              	.L15:
- 230 0030 00000000 		.word	.LANCHOR1
- 231 0034 00000000 		.word	.LANCHOR0
- 232              		.cfi_endproc
- 233              	.LFE72:
- 235              		.section	.text.delay,"ax",%progbits
- 236              		.align	1
- 237              		.global	delay
- 238              		.syntax unified
- 239              		.thumb
- 240              		.thumb_func
- 242              	delay:
- 243              	.LVL13:
- 244              	.LFB74:
-  62:Core/Src/main.c **** 
-  63:Core/Src/main.c **** void delay(uint32_t value)
-  64:Core/Src/main.c **** {
- 245              		.loc 1 64 1 view -0
- 246              		.cfi_startproc
- 247              		@ args = 0, pretend = 0, frame = 8
- 248              		@ frame_needed = 0, uses_anonymous_args = 0
- 249              		@ link register save eliminated.
- 250              		.loc 1 64 1 is_stmt 0 view .LVU37
- 251 0000 82B0     		sub	sp, sp, #8
-ARM GAS  /tmp/ccPL9oOW.s 			page 7
+ 309              		.loc 1 27 7 is_stmt 1 view .LVU50
+ 310 002a FFF7FEFF 		bl	ExecuteCommand
+ 311              	.LVL14:
+ 312 002e F8E7     		b	.L16
+ 313              	.L20:
+ 314              		.align	2
+ 315              	.L19:
+ 316 0030 00000000 		.word	.LANCHOR1
+ 317 0034 00000000 		.word	.LANCHOR0
+ 318              		.cfi_endproc
+ 319              	.LFE72:
+ 321              		.section	.text.delay,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	delay
+ 324              		.syntax unified
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	delay:
+ 329              	.LVL15:
+ 330              	.LFB74:
+  83:Core/Src/main.c **** 
+  84:Core/Src/main.c **** void delay(uint32_t value)
+  85:Core/Src/main.c **** {
+ARM GAS  /tmp/ccMXfvXU.s 			page 9
 
 
- 252              	.LCFI2:
- 253              		.cfi_def_cfa_offset 8
-  65:Core/Src/main.c ****   for(volatile uint32_t i = 0; i < value; i++);
- 254              		.loc 1 65 3 is_stmt 1 view .LVU38
- 255              	.LBB2:
- 256              		.loc 1 65 7 view .LVU39
- 257              		.loc 1 65 25 is_stmt 0 view .LVU40
- 258 0002 0023     		movs	r3, #0
- 259 0004 0193     		str	r3, [sp, #4]
- 260              		.loc 1 65 3 view .LVU41
- 261 0006 02E0     		b	.L18
- 262              	.L19:
- 263              		.loc 1 65 47 is_stmt 1 discriminator 3 view .LVU42
- 264              		.loc 1 65 43 discriminator 3 view .LVU43
- 265              		.loc 1 65 44 is_stmt 0 discriminator 3 view .LVU44
- 266 0008 019B     		ldr	r3, [sp, #4]
- 267 000a 0133     		adds	r3, r3, #1
- 268 000c 0193     		str	r3, [sp, #4]
- 269              	.L18:
- 270              		.loc 1 65 32 is_stmt 1 discriminator 1 view .LVU45
- 271              		.loc 1 65 34 is_stmt 0 discriminator 1 view .LVU46
- 272 000e 019B     		ldr	r3, [sp, #4]
- 273              		.loc 1 65 3 discriminator 1 view .LVU47
- 274 0010 8342     		cmp	r3, r0
- 275 0012 F9D3     		bcc	.L19
- 276              	.LBE2:
-  66:Core/Src/main.c **** }...
- 277              		.loc 1 66 1 view .LVU48
- 278 0014 02B0     		add	sp, sp, #8
- 279              	.LCFI3:
- 280              		.cfi_def_cfa_offset 0
- 281              		@ sp needed
- 282 0016 7047     		bx	lr
- 283              		.cfi_endproc
- 284              	.LFE74:
- 286              		.global	TxBuffer
- 287              		.global	RxBuffer
- 288              		.global	CommandRecieved
- 289              		.section	.bss.CommandRecieved,"aw",%nobits
- 290              		.set	.LANCHOR0,. + 0
- 293              	CommandRecieved:
- 294 0000 00       		.space	1
- 295              		.section	.bss.RxBuffer,"aw",%nobits
- 296              		.align	2
- 297              		.set	.LANCHOR1,. + 0
- 300              	RxBuffer:
- 301 0000 00000000 		.space	256
- 301      00000000 
- 301      00000000 
- 301      00000000 
- 301      00000000 
- 302              		.section	.bss.TxBuffer,"aw",%nobits
- 303              		.align	2
- 304              		.set	.LANCHOR2,. + 0
- 307              	TxBuffer:
- 308 0000 00000000 		.space	256
- 308      00000000 
-ARM GAS  /tmp/ccPL9oOW.s 			page 8
+ 331              		.loc 1 85 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 8
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		@ link register save eliminated.
+ 336              		.loc 1 85 1 is_stmt 0 view .LVU52
+ 337 0000 82B0     		sub	sp, sp, #8
+ 338              	.LCFI5:
+ 339              		.cfi_def_cfa_offset 8
+  86:Core/Src/main.c ****   for(volatile uint32_t i = 0; i < value; i++);
+ 340              		.loc 1 86 3 is_stmt 1 view .LVU53
+ 341              	.LBB4:
+ 342              		.loc 1 86 7 view .LVU54
+ 343              		.loc 1 86 25 is_stmt 0 view .LVU55
+ 344 0002 0023     		movs	r3, #0
+ 345 0004 0193     		str	r3, [sp, #4]
+ 346              		.loc 1 86 3 view .LVU56
+ 347 0006 02E0     		b	.L22
+ 348              	.L23:
+ 349              		.loc 1 86 47 is_stmt 1 discriminator 3 view .LVU57
+ 350              		.loc 1 86 43 discriminator 3 view .LVU58
+ 351              		.loc 1 86 44 is_stmt 0 discriminator 3 view .LVU59
+ 352 0008 019B     		ldr	r3, [sp, #4]
+ 353 000a 0133     		adds	r3, r3, #1
+ 354 000c 0193     		str	r3, [sp, #4]
+ 355              	.L22:
+ 356              		.loc 1 86 32 is_stmt 1 discriminator 1 view .LVU60
+ 357              		.loc 1 86 34 is_stmt 0 discriminator 1 view .LVU61
+ 358 000e 019B     		ldr	r3, [sp, #4]
+ 359              		.loc 1 86 3 discriminator 1 view .LVU62
+ 360 0010 8342     		cmp	r3, r0
+ 361 0012 F9D3     		bcc	.L23
+ 362              	.LBE4:
+  87:Core/Src/main.c **** }...
+ 363              		.loc 1 87 1 view .LVU63
+ 364 0014 02B0     		add	sp, sp, #8
+ 365              	.LCFI6:
+ 366              		.cfi_def_cfa_offset 0
+ 367              		@ sp needed
+ 368 0016 7047     		bx	lr
+ 369              		.cfi_endproc
+ 370              	.LFE74:
+ 372              		.global	TxBuffer
+ 373              		.global	RxBuffer
+ 374              		.global	CommandRecieved
+ 375              		.section	.bss.CommandRecieved,"aw",%nobits
+ 376              		.set	.LANCHOR0,. + 0
+ 379              	CommandRecieved:
+ 380 0000 00       		.space	1
+ 381              		.section	.bss.RxBuffer,"aw",%nobits
+ 382              		.align	2
+ 383              		.set	.LANCHOR1,. + 0
+ 386              	RxBuffer:
+ 387 0000 00000000 		.space	256
+ 387      00000000 
+ 387      00000000 
+ 387      00000000 
+ARM GAS  /tmp/ccMXfvXU.s 			page 10
 
 
- 308      00000000 
- 308      00000000 
- 308      00000000 
- 309              		.text
- 310              	.Letext0:
- 311              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
- 312              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
- 313              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
- 314              		.file 5 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
- 315              		.file 6 "Core/Inc/usart.h"
- 316              		.file 7 "Core/Inc/rcc.h"
- 317              		.file 8 "Core/Inc/gpio.h"
- 318              		.file 9 "<built-in>"
-ARM GAS  /tmp/ccPL9oOW.s 			page 9
+ 387      00000000 
+ 388              		.section	.bss.TxBuffer,"aw",%nobits
+ 389              		.align	2
+ 390              		.set	.LANCHOR2,. + 0
+ 393              	TxBuffer:
+ 394 0000 00000000 		.space	256
+ 394      00000000 
+ 394      00000000 
+ 394      00000000 
+ 394      00000000 
+ 395              		.text
+ 396              	.Letext0:
+ 397              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+ 398              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+ 399              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+ 400              		.file 5 "<built-in>"
+ 401              		.file 6 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
+ 402              		.file 7 "Core/Inc/usart.h"
+ 403              		.file 8 "Core/Inc/rcc.h"
+ 404              		.file 9 "Core/Inc/gpio.h"
+ARM GAS  /tmp/ccMXfvXU.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccPL9oOW.s:18     .rodata.ExecuteCommand.str1.4:0000000000000000 $d
-     /tmp/ccPL9oOW.s:40     .text.ExecuteCommand:0000000000000000 $t
-     /tmp/ccPL9oOW.s:46     .text.ExecuteCommand:0000000000000000 ExecuteCommand
-     /tmp/ccPL9oOW.s:161    .text.ExecuteCommand:000000000000009c $d
-     /tmp/ccPL9oOW.s:175    .text.main:0000000000000000 $t
-     /tmp/ccPL9oOW.s:181    .text.main:0000000000000000 main
-     /tmp/ccPL9oOW.s:230    .text.main:0000000000000030 $d
-     /tmp/ccPL9oOW.s:236    .text.delay:0000000000000000 $t
-     /tmp/ccPL9oOW.s:242    .text.delay:0000000000000000 delay
-     /tmp/ccPL9oOW.s:307    .bss.TxBuffer:0000000000000000 TxBuffer
-     /tmp/ccPL9oOW.s:300    .bss.RxBuffer:0000000000000000 RxBuffer
-     /tmp/ccPL9oOW.s:293    .bss.CommandRecieved:0000000000000000 CommandRecieved
-     /tmp/ccPL9oOW.s:294    .bss.CommandRecieved:0000000000000000 $d
-     /tmp/ccPL9oOW.s:296    .bss.RxBuffer:0000000000000000 $d
-     /tmp/ccPL9oOW.s:303    .bss.TxBuffer:0000000000000000 $d
+     /tmp/ccMXfvXU.s:18     .rodata.ExecuteCommand.str1.4:0000000000000000 $d
+     /tmp/ccMXfvXU.s:52     .text.ExecuteCommand:0000000000000000 $t
+     /tmp/ccMXfvXU.s:58     .text.ExecuteCommand:0000000000000000 ExecuteCommand
+     /tmp/ccMXfvXU.s:243    .text.ExecuteCommand:00000000000000fc $d
+     /tmp/ccMXfvXU.s:261    .text.main:0000000000000000 $t
+     /tmp/ccMXfvXU.s:267    .text.main:0000000000000000 main
+     /tmp/ccMXfvXU.s:316    .text.main:0000000000000030 $d
+     /tmp/ccMXfvXU.s:322    .text.delay:0000000000000000 $t
+     /tmp/ccMXfvXU.s:328    .text.delay:0000000000000000 delay
+     /tmp/ccMXfvXU.s:393    .bss.TxBuffer:0000000000000000 TxBuffer
+     /tmp/ccMXfvXU.s:386    .bss.RxBuffer:0000000000000000 RxBuffer
+     /tmp/ccMXfvXU.s:379    .bss.CommandRecieved:0000000000000000 CommandRecieved
+     /tmp/ccMXfvXU.s:380    .bss.CommandRecieved:0000000000000000 $d
+     /tmp/ccMXfvXU.s:382    .bss.RxBuffer:0000000000000000 $d
+     /tmp/ccMXfvXU.s:389    .bss.TxBuffer:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 strncmp
+sscanf
 SendString
 memset
 sysclk_init
