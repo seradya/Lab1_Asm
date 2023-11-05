@@ -10,6 +10,7 @@ int main(void)
   sysclk_init();        //System clock initializing 
   led_init();           //Initializing GPIO port for led
   tim2_init();          //initializing TIM2
+  btn_init();           //User button initializingd
 
   while(true)
   {

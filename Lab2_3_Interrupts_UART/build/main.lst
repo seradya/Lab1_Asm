@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc11unzR.s 			page 1
+ARM GAS  /tmp/ccltLAgW.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -57,99 +57,104 @@ ARM GAS  /tmp/cc11unzR.s 			page 1
   43              		.loc 1 12 3 view .LVU3
   44 000a FFF7FEFF 		bl	tim2_init
   45              	.LVL2:
-  46              	.L2:
-ARM GAS  /tmp/cc11unzR.s 			page 2
+  13:Core/Src/main.c ****   btn_init();           //User button initializingd
+ARM GAS  /tmp/ccltLAgW.s 			page 2
 
 
-  13:Core/Src/main.c **** 
-  14:Core/Src/main.c ****   while(true)
-  47              		.loc 1 14 3 discriminator 1 view .LVU4
+  46              		.loc 1 13 3 view .LVU4
+  47 000e FFF7FEFF 		bl	btn_init
+  48              	.LVL3:
+  49              	.L2:
+  14:Core/Src/main.c **** 
+  15:Core/Src/main.c ****   while(true)
+  50              		.loc 1 15 3 discriminator 1 view .LVU5
+  16:Core/Src/main.c ****   {
+  17:Core/Src/main.c **** 
+  18:Core/Src/main.c ****   }
+  51              		.loc 1 18 3 discriminator 1 view .LVU6
   15:Core/Src/main.c ****   {
-  16:Core/Src/main.c **** 
-  17:Core/Src/main.c ****   }
-  48              		.loc 1 17 3 discriminator 1 view .LVU5
-  14:Core/Src/main.c ****   {
-  49              		.loc 1 14 8 discriminator 1 view .LVU6
-  50 000e FEE7     		b	.L2
-  51              		.cfi_endproc
-  52              	.LFE72:
-  54              		.section	.text.delay,"ax",%progbits
-  55              		.align	1
-  56              		.global	delay
-  57              		.syntax unified
-  58              		.thumb
-  59              		.thumb_func
-  61              	delay:
-  62              	.LVL3:
-  63              	.LFB73:
-  18:Core/Src/main.c **** 
+  52              		.loc 1 15 8 discriminator 1 view .LVU7
+  53 0012 FEE7     		b	.L2
+  54              		.cfi_endproc
+  55              	.LFE72:
+  57              		.section	.text.delay,"ax",%progbits
+  58              		.align	1
+  59              		.global	delay
+  60              		.syntax unified
+  61              		.thumb
+  62              		.thumb_func
+  64              	delay:
+  65              	.LVL4:
+  66              	.LFB73:
   19:Core/Src/main.c **** 
-  20:Core/Src/main.c **** }
-  21:Core/Src/main.c **** 
-  22:Core/Src/main.c **** void delay(uint32_t value)
-  23:Core/Src/main.c **** {
-  64              		.loc 1 23 1 view -0
-  65              		.cfi_startproc
-  66              		@ args = 0, pretend = 0, frame = 8
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68              		@ link register save eliminated.
-  69              		.loc 1 23 1 is_stmt 0 view .LVU8
-  70 0000 82B0     		sub	sp, sp, #8
-  71              	.LCFI1:
-  72              		.cfi_def_cfa_offset 8
-  24:Core/Src/main.c ****   for(volatile uint32_t i = 0; i < value; i++);
-  73              		.loc 1 24 3 is_stmt 1 view .LVU9
-  74              	.LBB2:
-  75              		.loc 1 24 7 view .LVU10
-  76              		.loc 1 24 25 is_stmt 0 view .LVU11
-  77 0002 0023     		movs	r3, #0
-  78 0004 0193     		str	r3, [sp, #4]
-  79              		.loc 1 24 3 view .LVU12
-  80 0006 02E0     		b	.L5
-  81              	.L6:
-  82              		.loc 1 24 47 is_stmt 1 discriminator 3 view .LVU13
-  83              		.loc 1 24 43 discriminator 3 view .LVU14
-  84              		.loc 1 24 44 is_stmt 0 discriminator 3 view .LVU15
-  85 0008 019B     		ldr	r3, [sp, #4]
-  86 000a 0133     		adds	r3, r3, #1
-  87 000c 0193     		str	r3, [sp, #4]
-  88              	.L5:
-  89              		.loc 1 24 32 is_stmt 1 discriminator 1 view .LVU16
-  90              		.loc 1 24 34 is_stmt 0 discriminator 1 view .LVU17
-  91 000e 019B     		ldr	r3, [sp, #4]
-  92              		.loc 1 24 3 discriminator 1 view .LVU18
-ARM GAS  /tmp/cc11unzR.s 			page 3
+  20:Core/Src/main.c **** 
+  21:Core/Src/main.c **** }
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c **** void delay(uint32_t value)
+  24:Core/Src/main.c **** {
+  67              		.loc 1 24 1 view -0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 8
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72              		.loc 1 24 1 is_stmt 0 view .LVU9
+  73 0000 82B0     		sub	sp, sp, #8
+  74              	.LCFI1:
+  75              		.cfi_def_cfa_offset 8
+  25:Core/Src/main.c ****   for(volatile uint32_t i = 0; i < value; i++);
+  76              		.loc 1 25 3 is_stmt 1 view .LVU10
+  77              	.LBB2:
+  78              		.loc 1 25 7 view .LVU11
+  79              		.loc 1 25 25 is_stmt 0 view .LVU12
+  80 0002 0023     		movs	r3, #0
+  81 0004 0193     		str	r3, [sp, #4]
+  82              		.loc 1 25 3 view .LVU13
+  83 0006 02E0     		b	.L5
+  84              	.L6:
+  85              		.loc 1 25 47 is_stmt 1 discriminator 3 view .LVU14
+  86              		.loc 1 25 43 discriminator 3 view .LVU15
+  87              		.loc 1 25 44 is_stmt 0 discriminator 3 view .LVU16
+  88 0008 019B     		ldr	r3, [sp, #4]
+  89 000a 0133     		adds	r3, r3, #1
+  90 000c 0193     		str	r3, [sp, #4]
+  91              	.L5:
+ARM GAS  /tmp/ccltLAgW.s 			page 3
 
 
-  93 0010 8342     		cmp	r3, r0
-  94 0012 F9D3     		bcc	.L6
-  95              	.LBE2:
-  25:Core/Src/main.c **** }...
-  96              		.loc 1 25 1 view .LVU19
-  97 0014 02B0     		add	sp, sp, #8
-  98              	.LCFI2:
-  99              		.cfi_def_cfa_offset 0
- 100              		@ sp needed
- 101 0016 7047     		bx	lr
- 102              		.cfi_endproc
- 103              	.LFE73:
- 105              		.text
- 106              	.Letext0:
- 107              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
- 108              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
- 109              		.file 4 "Core/Inc/rcc.h"
- 110              		.file 5 "Core/Inc/gpio.h"
-ARM GAS  /tmp/cc11unzR.s 			page 4
+  92              		.loc 1 25 32 is_stmt 1 discriminator 1 view .LVU17
+  93              		.loc 1 25 34 is_stmt 0 discriminator 1 view .LVU18
+  94 000e 019B     		ldr	r3, [sp, #4]
+  95              		.loc 1 25 3 discriminator 1 view .LVU19
+  96 0010 8342     		cmp	r3, r0
+  97 0012 F9D3     		bcc	.L6
+  98              	.LBE2:
+  26:Core/Src/main.c **** }...
+  99              		.loc 1 26 1 view .LVU20
+ 100 0014 02B0     		add	sp, sp, #8
+ 101              	.LCFI2:
+ 102              		.cfi_def_cfa_offset 0
+ 103              		@ sp needed
+ 104 0016 7047     		bx	lr
+ 105              		.cfi_endproc
+ 106              	.LFE73:
+ 108              		.text
+ 109              	.Letext0:
+ 110              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+ 111              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+ 112              		.file 4 "Core/Inc/rcc.h"
+ 113              		.file 5 "Core/Inc/gpio.h"
+ARM GAS  /tmp/ccltLAgW.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cc11unzR.s:18     .text.main:0000000000000000 $t
-     /tmp/cc11unzR.s:24     .text.main:0000000000000000 main
-     /tmp/cc11unzR.s:55     .text.delay:0000000000000000 $t
-     /tmp/cc11unzR.s:61     .text.delay:0000000000000000 delay
+     /tmp/ccltLAgW.s:18     .text.main:0000000000000000 $t
+     /tmp/ccltLAgW.s:24     .text.main:0000000000000000 main
+     /tmp/ccltLAgW.s:58     .text.delay:0000000000000000 $t
+     /tmp/ccltLAgW.s:64     .text.delay:0000000000000000 delay
 
 UNDEFINED SYMBOLS
 sysclk_init
 led_init
 tim2_init
+btn_init

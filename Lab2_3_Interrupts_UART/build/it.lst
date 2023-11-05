@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccaGCM1Y.s 			page 1
+ARM GAS  /tmp/ccnUhpnC.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -30,47 +30,102 @@ ARM GAS  /tmp/ccaGCM1Y.s 			page 1
    2:Core/Src/it.c **** #include "stm32l1xx.h"
    3:Core/Src/it.c **** #include "it.h"
    4:Core/Src/it.c **** #include "gpio.h"
-   5:Core/Src/it.c **** 
-   6:Core/Src/it.c **** void TIM2_IRQHandler(void)
-   7:Core/Src/it.c **** {
-  27              		.loc 1 7 1 view -0
+   5:Core/Src/it.c **** #include "main.h"
+   6:Core/Src/it.c **** 
+   7:Core/Src/it.c **** void TIM2_IRQHandler(void)
+   8:Core/Src/it.c **** {
+  27              		.loc 1 8 1 view -0
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              		@ link register save eliminated.
-   8:Core/Src/it.c ****     TIM2->SR &= ~TIM_SR_UIF;
-  32              		.loc 1 8 5 view .LVU1
-  33              		.loc 1 8 14 is_stmt 0 view .LVU2
+   9:Core/Src/it.c ****     TIM2->SR &= ~TIM_SR_UIF;        //Clearing update interrupt flag
+  32              		.loc 1 9 5 view .LVU1
+  33              		.loc 1 9 14 is_stmt 0 view .LVU2
   34 0000 4FF08042 		mov	r2, #1073741824
   35 0004 1369     		ldr	r3, [r2, #16]
   36 0006 23F00103 		bic	r3, r3, #1
   37 000a 1361     		str	r3, [r2, #16]
-   9:Core/Src/it.c ****     LED_SWAP();
-  38              		.loc 1 9 5 is_stmt 1 view .LVU3
+  10:Core/Src/it.c ****     LED_SWAP();
+  38              		.loc 1 10 5 is_stmt 1 view .LVU3
   39 000c 02F50132 		add	r2, r2, #132096
   40 0010 5369     		ldr	r3, [r2, #20]
   41 0012 83F08003 		eor	r3, r3, #128
   42 0016 5361     		str	r3, [r2, #20]
-  43              		.loc 1 9 15 view .LVU4
-  10:Core/Src/it.c **** }...
-  44              		.loc 1 10 1 is_stmt 0 view .LVU5
+  43              		.loc 1 10 15 view .LVU4
+  11:Core/Src/it.c **** }
+  44              		.loc 1 11 1 is_stmt 0 view .LVU5
   45 0018 7047     		bx	lr
   46              		.cfi_endproc
   47              	.LFE72:
-  49              		.text
-ARM GAS  /tmp/ccaGCM1Y.s 			page 2
+ARM GAS  /tmp/ccnUhpnC.s 			page 2
 
 
-  50              	.Letext0:
-  51              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
-  52              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
-  53              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
-ARM GAS  /tmp/ccaGCM1Y.s 			page 3
+  49              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+  50              		.align	1
+  51              		.global	EXTI0_IRQHandler
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	EXTI0_IRQHandler:
+  57              	.LFB73:
+  12:Core/Src/it.c **** 
+  13:Core/Src/it.c **** void EXTI0_IRQHandler(void)
+  14:Core/Src/it.c **** {
+  58              		.loc 1 14 1 is_stmt 1 view -0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62 0000 08B5     		push	{r3, lr}
+  63              	.LCFI0:
+  64              		.cfi_def_cfa_offset 8
+  65              		.cfi_offset 3, -8
+  66              		.cfi_offset 14, -4
+  15:Core/Src/it.c ****     delay(1000);                    //Debouncing
+  67              		.loc 1 15 5 view .LVU7
+  68 0002 4FF47A70 		mov	r0, #1000
+  69 0006 FFF7FEFF 		bl	delay
+  70              	.LVL0:
+  16:Core/Src/it.c ****     EXTI->PR |= EXTI_PR_PR0;        //Clearing trigger request
+  71              		.loc 1 16 5 view .LVU8
+  72              		.loc 1 16 14 is_stmt 0 view .LVU9
+  73 000a 064A     		ldr	r2, .L4
+  74 000c 5369     		ldr	r3, [r2, #20]
+  75 000e 43F00103 		orr	r3, r3, #1
+  76 0012 5361     		str	r3, [r2, #20]
+  17:Core/Src/it.c ****     
+  18:Core/Src/it.c ****     TIM2->CR1 ^= TIM_CR1_CEN;       //Toggle TIM2
+  77              		.loc 1 18 5 is_stmt 1 view .LVU10
+  78              		.loc 1 18 15 is_stmt 0 view .LVU11
+  79 0014 4FF08042 		mov	r2, #1073741824
+  80 0018 1368     		ldr	r3, [r2]
+  81 001a 83F00103 		eor	r3, r3, #1
+  82 001e 1360     		str	r3, [r2]
+  19:Core/Src/it.c **** }...
+  83              		.loc 1 19 1 view .LVU12
+  84 0020 08BD     		pop	{r3, pc}
+  85              	.L5:
+  86 0022 00BF     		.align	2
+  87              	.L4:
+  88 0024 00040140 		.word	1073808384
+  89              		.cfi_endproc
+  90              	.LFE73:
+  92              		.text
+  93              	.Letext0:
+  94              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+  95              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+  96              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+  97              		.file 5 "Core/Inc/main.h"
+ARM GAS  /tmp/ccnUhpnC.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 it.c
-     /tmp/ccaGCM1Y.s:18     .text.TIM2_IRQHandler:0000000000000000 $t
-     /tmp/ccaGCM1Y.s:24     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/ccnUhpnC.s:18     .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/ccnUhpnC.s:24     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/ccnUhpnC.s:50     .text.EXTI0_IRQHandler:0000000000000000 $t
+     /tmp/ccnUhpnC.s:56     .text.EXTI0_IRQHandler:0000000000000000 EXTI0_IRQHandler
+     /tmp/ccnUhpnC.s:88     .text.EXTI0_IRQHandler:0000000000000024 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+delay

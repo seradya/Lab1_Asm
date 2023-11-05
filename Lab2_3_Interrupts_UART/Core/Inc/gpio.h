@@ -6,5 +6,6 @@
 #define LED_SWAP()    GPIOB->ODR ^= GPIO_ODR_ODR_7;   //Toggle led
 
 void led_init(void);
+void btn_init(void);
 
 #endif /* __GPIO_H */
