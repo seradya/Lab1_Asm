@@ -34,8 +34,30 @@ int main(void)
 void ExecuteCommand(void)
 {
   CommandRecieved = false;
-  SendString(RxBuffer);
+
+  if(strncmp(RxBuffer, "*IDN?", 5) == 0)
+  {
+    strcpy(TxBuffer,"BMSTU, IU4, Lab3");
+  }
+  else if(strncmp(RxBuffer, "Start", 5) == 0)
+  {
+    TIM2->CR1 |= TIM_CR1_CEN;
+    strcpy(TxBuffer,"Ok, start");
+  }
+  else if(strncmp(RxBuffer, "Stop", 4) == 0)
+  {
+    TIM2->CR1 &= ~TIM_CR1_CEN;
+    strcpy(TxBuffer,"Ok, stop");
+  }
+  else
+  {
+    strcpy(TxBuffer,"Unknown command!");
+  }
+
+
+  SendString(TxBuffer);
   memset(RxBuffer,0,256);
+  memset(TxBuffer,0,256);
 }
 
 void delay(uint32_t value)

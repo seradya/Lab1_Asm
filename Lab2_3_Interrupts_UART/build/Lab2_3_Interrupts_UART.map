@@ -10,6 +10,8 @@ Archive member included to satisfy reference by file (symbol)
                               /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o (memset)
 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen.o)
                               build/it.o (strlen)
+/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+                              build/main.o (strncmp)
 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
                               /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o) (_exit)
 
@@ -30,7 +32,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/main.o
  .data          0x0000000000000000        0x0 build/main.o
  .bss           0x0000000000000000        0x0 build/main.o
- .bss.TxBuffer  0x0000000000000000      0x100 build/main.o
  .text          0x0000000000000000        0x0 build/gpio.o
  .data          0x0000000000000000        0x0 build/gpio.o
  .bss           0x0000000000000000        0x0 build/gpio.o
@@ -91,6 +92,9 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
  .data          0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen.o)
  .bss           0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen.o)
+ .text          0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+ .data          0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+ .bss           0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
  .text          0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
  .data          0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
  .bss           0x0000000000000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
@@ -154,7 +158,7 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
                 0x0000000008000000                g_pfnVectors
                 0x000000000800013c                . = ALIGN (0x4)
 
-.text           0x000000000800013c      0x460
+.text           0x000000000800013c      0x524
                 0x000000000800013c                . = ALIGN (0x4)
  *(.text)
  .text          0x000000000800013c       0x40 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
@@ -162,199 +166,204 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
                 0x000000000800017c                strlen
  *(.text*)
  .text.ExecuteCommand
-                0x000000000800018c       0x28 build/main.o
+                0x000000000800018c       0xc4 build/main.o
                 0x000000000800018c                ExecuteCommand
- .text.main     0x00000000080001b4       0x38 build/main.o
-                0x00000000080001b4                main
- .text.delay    0x00000000080001ec       0x18 build/main.o
-                0x00000000080001ec                delay
+ .text.main     0x0000000008000250       0x38 build/main.o
+                0x0000000008000250                main
+ .text.delay    0x0000000008000288       0x18 build/main.o
+                0x0000000008000288                delay
  .text.led_init
-                0x0000000008000204       0x28 build/gpio.o
-                0x0000000008000204                led_init
+                0x00000000080002a0       0x28 build/gpio.o
+                0x00000000080002a0                led_init
  .text.btn_init
-                0x000000000800022c       0x64 build/gpio.o
-                0x000000000800022c                btn_init
+                0x00000000080002c8       0x64 build/gpio.o
+                0x00000000080002c8                btn_init
  .text.tim2_init
-                0x0000000008000290       0x44 build/tim.o
-                0x0000000008000290                tim2_init
+                0x000000000800032c       0x44 build/tim.o
+                0x000000000800032c                tim2_init
  .text.sysclk_init
-                0x00000000080002d4       0x90 build/rcc.o
-                0x00000000080002d4                sysclk_init
+                0x0000000008000370       0x90 build/rcc.o
+                0x0000000008000370                sysclk_init
  .text.TIM2_IRQHandler
-                0x0000000008000364       0x1a build/it.o
-                0x0000000008000364                TIM2_IRQHandler
- *fill*         0x000000000800037e        0x2 
+                0x0000000008000400       0x1a build/it.o
+                0x0000000008000400                TIM2_IRQHandler
+ *fill*         0x000000000800041a        0x2 
  .text.EXTI0_IRQHandler
-                0x0000000008000380       0x28 build/it.o
-                0x0000000008000380                EXTI0_IRQHandler
+                0x000000000800041c       0x28 build/it.o
+                0x000000000800041c                EXTI0_IRQHandler
  .text.USART2_IRQHandler
-                0x00000000080003a8       0x40 build/it.o
-                0x00000000080003a8                USART2_IRQHandler
+                0x0000000008000444       0x40 build/it.o
+                0x0000000008000444                USART2_IRQHandler
  .text.usart_init
-                0x00000000080003e8       0x98 build/usart.o
-                0x00000000080003e8                usart_init
+                0x0000000008000484       0x98 build/usart.o
+                0x0000000008000484                usart_init
  .text.SendString
-                0x0000000008000480       0x4c build/usart.o
-                0x0000000008000480                SendString
+                0x000000000800051c       0x4c build/usart.o
+                0x000000000800051c                SendString
  .text.NMI_Handler
-                0x00000000080004cc        0x2 build/stm32l1xx_it.o
-                0x00000000080004cc                NMI_Handler
+                0x0000000008000568        0x2 build/stm32l1xx_it.o
+                0x0000000008000568                NMI_Handler
  .text.HardFault_Handler
-                0x00000000080004ce        0x2 build/stm32l1xx_it.o
-                0x00000000080004ce                HardFault_Handler
+                0x000000000800056a        0x2 build/stm32l1xx_it.o
+                0x000000000800056a                HardFault_Handler
  .text.MemManage_Handler
-                0x00000000080004d0        0x2 build/stm32l1xx_it.o
-                0x00000000080004d0                MemManage_Handler
+                0x000000000800056c        0x2 build/stm32l1xx_it.o
+                0x000000000800056c                MemManage_Handler
  .text.BusFault_Handler
-                0x00000000080004d2        0x2 build/stm32l1xx_it.o
-                0x00000000080004d2                BusFault_Handler
+                0x000000000800056e        0x2 build/stm32l1xx_it.o
+                0x000000000800056e                BusFault_Handler
  .text.UsageFault_Handler
-                0x00000000080004d4        0x2 build/stm32l1xx_it.o
-                0x00000000080004d4                UsageFault_Handler
+                0x0000000008000570        0x2 build/stm32l1xx_it.o
+                0x0000000008000570                UsageFault_Handler
  .text.SVC_Handler
-                0x00000000080004d6        0x2 build/stm32l1xx_it.o
-                0x00000000080004d6                SVC_Handler
+                0x0000000008000572        0x2 build/stm32l1xx_it.o
+                0x0000000008000572                SVC_Handler
  .text.DebugMon_Handler
-                0x00000000080004d8        0x2 build/stm32l1xx_it.o
-                0x00000000080004d8                DebugMon_Handler
+                0x0000000008000574        0x2 build/stm32l1xx_it.o
+                0x0000000008000574                DebugMon_Handler
  .text.PendSV_Handler
-                0x00000000080004da        0x2 build/stm32l1xx_it.o
-                0x00000000080004da                PendSV_Handler
+                0x0000000008000576        0x2 build/stm32l1xx_it.o
+                0x0000000008000576                PendSV_Handler
  .text.SysTick_Handler
-                0x00000000080004dc        0x2 build/stm32l1xx_it.o
-                0x00000000080004dc                SysTick_Handler
+                0x0000000008000578        0x2 build/stm32l1xx_it.o
+                0x0000000008000578                SysTick_Handler
  .text.SystemInit
-                0x00000000080004de        0x2 build/system_stm32l1xx.o
-                0x00000000080004de                SystemInit
+                0x000000000800057a        0x2 build/system_stm32l1xx.o
+                0x000000000800057a                SystemInit
  .text.Reset_Handler
-                0x00000000080004e0       0x48 build/startup_stm32l152xc.o
-                0x00000000080004e0                Reset_Handler
+                0x000000000800057c       0x48 build/startup_stm32l152xc.o
+                0x000000000800057c                Reset_Handler
  .text.Default_Handler
-                0x0000000008000528        0x2 build/startup_stm32l152xc.o
-                0x0000000008000528                RTC_Alarm_IRQHandler
-                0x0000000008000528                EXTI2_IRQHandler
-                0x0000000008000528                COMP_ACQ_IRQHandler
-                0x0000000008000528                TIM10_IRQHandler
-                0x0000000008000528                USB_HP_IRQHandler
-                0x0000000008000528                TIM6_IRQHandler
-                0x0000000008000528                PVD_IRQHandler
-                0x0000000008000528                EXTI3_IRQHandler
-                0x0000000008000528                I2C2_EV_IRQHandler
-                0x0000000008000528                SPI1_IRQHandler
-                0x0000000008000528                USB_FS_WKUP_IRQHandler
-                0x0000000008000528                DMA2_Channel2_IRQHandler
-                0x0000000008000528                DMA1_Channel4_IRQHandler
-                0x0000000008000528                ADC1_IRQHandler
-                0x0000000008000528                USART3_IRQHandler
-                0x0000000008000528                DMA1_Channel7_IRQHandler
-                0x0000000008000528                LCD_IRQHandler
-                0x0000000008000528                TIM4_IRQHandler
-                0x0000000008000528                DMA2_Channel1_IRQHandler
-                0x0000000008000528                I2C1_EV_IRQHandler
-                0x0000000008000528                DMA1_Channel6_IRQHandler
-                0x0000000008000528                DMA2_Channel4_IRQHandler
-                0x0000000008000528                TIM3_IRQHandler
-                0x0000000008000528                RCC_IRQHandler
-                0x0000000008000528                DMA1_Channel1_IRQHandler
-                0x0000000008000528                Default_Handler
-                0x0000000008000528                EXTI15_10_IRQHandler
-                0x0000000008000528                TIM7_IRQHandler
-                0x0000000008000528                TIM5_IRQHandler
-                0x0000000008000528                EXTI9_5_IRQHandler
-                0x0000000008000528                TIM9_IRQHandler
-                0x0000000008000528                TAMPER_STAMP_IRQHandler
-                0x0000000008000528                RTC_WKUP_IRQHandler
-                0x0000000008000528                SPI2_IRQHandler
-                0x0000000008000528                DMA2_Channel5_IRQHandler
-                0x0000000008000528                DMA1_Channel5_IRQHandler
-                0x0000000008000528                USB_LP_IRQHandler
-                0x0000000008000528                EXTI4_IRQHandler
-                0x0000000008000528                DMA1_Channel3_IRQHandler
-                0x0000000008000528                COMP_IRQHandler
-                0x0000000008000528                WWDG_IRQHandler
-                0x0000000008000528                DAC_IRQHandler
-                0x0000000008000528                EXTI1_IRQHandler
-                0x0000000008000528                TIM11_IRQHandler
-                0x0000000008000528                I2C2_ER_IRQHandler
-                0x0000000008000528                DMA1_Channel2_IRQHandler
-                0x0000000008000528                FLASH_IRQHandler
-                0x0000000008000528                USART1_IRQHandler
-                0x0000000008000528                SPI3_IRQHandler
-                0x0000000008000528                I2C1_ER_IRQHandler
-                0x0000000008000528                DMA2_Channel3_IRQHandler
- *fill*         0x000000000800052a        0x2 
+                0x00000000080005c4        0x2 build/startup_stm32l152xc.o
+                0x00000000080005c4                RTC_Alarm_IRQHandler
+                0x00000000080005c4                EXTI2_IRQHandler
+                0x00000000080005c4                COMP_ACQ_IRQHandler
+                0x00000000080005c4                TIM10_IRQHandler
+                0x00000000080005c4                USB_HP_IRQHandler
+                0x00000000080005c4                TIM6_IRQHandler
+                0x00000000080005c4                PVD_IRQHandler
+                0x00000000080005c4                EXTI3_IRQHandler
+                0x00000000080005c4                I2C2_EV_IRQHandler
+                0x00000000080005c4                SPI1_IRQHandler
+                0x00000000080005c4                USB_FS_WKUP_IRQHandler
+                0x00000000080005c4                DMA2_Channel2_IRQHandler
+                0x00000000080005c4                DMA1_Channel4_IRQHandler
+                0x00000000080005c4                ADC1_IRQHandler
+                0x00000000080005c4                USART3_IRQHandler
+                0x00000000080005c4                DMA1_Channel7_IRQHandler
+                0x00000000080005c4                LCD_IRQHandler
+                0x00000000080005c4                TIM4_IRQHandler
+                0x00000000080005c4                DMA2_Channel1_IRQHandler
+                0x00000000080005c4                I2C1_EV_IRQHandler
+                0x00000000080005c4                DMA1_Channel6_IRQHandler
+                0x00000000080005c4                DMA2_Channel4_IRQHandler
+                0x00000000080005c4                TIM3_IRQHandler
+                0x00000000080005c4                RCC_IRQHandler
+                0x00000000080005c4                DMA1_Channel1_IRQHandler
+                0x00000000080005c4                Default_Handler
+                0x00000000080005c4                EXTI15_10_IRQHandler
+                0x00000000080005c4                TIM7_IRQHandler
+                0x00000000080005c4                TIM5_IRQHandler
+                0x00000000080005c4                EXTI9_5_IRQHandler
+                0x00000000080005c4                TIM9_IRQHandler
+                0x00000000080005c4                TAMPER_STAMP_IRQHandler
+                0x00000000080005c4                RTC_WKUP_IRQHandler
+                0x00000000080005c4                SPI2_IRQHandler
+                0x00000000080005c4                DMA2_Channel5_IRQHandler
+                0x00000000080005c4                DMA1_Channel5_IRQHandler
+                0x00000000080005c4                USB_LP_IRQHandler
+                0x00000000080005c4                EXTI4_IRQHandler
+                0x00000000080005c4                DMA1_Channel3_IRQHandler
+                0x00000000080005c4                COMP_IRQHandler
+                0x00000000080005c4                WWDG_IRQHandler
+                0x00000000080005c4                DAC_IRQHandler
+                0x00000000080005c4                EXTI1_IRQHandler
+                0x00000000080005c4                TIM11_IRQHandler
+                0x00000000080005c4                I2C2_ER_IRQHandler
+                0x00000000080005c4                DMA1_Channel2_IRQHandler
+                0x00000000080005c4                FLASH_IRQHandler
+                0x00000000080005c4                USART1_IRQHandler
+                0x00000000080005c4                SPI3_IRQHandler
+                0x00000000080005c4                I2C1_ER_IRQHandler
+                0x00000000080005c4                DMA2_Channel3_IRQHandler
+ *fill*         0x00000000080005c6        0x2 
  .text.__libc_init_array
-                0x000000000800052c       0x48 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
-                0x000000000800052c                __libc_init_array
- .text.memset   0x0000000008000574       0x10 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
-                0x0000000008000574                memset
+                0x00000000080005c8       0x48 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
+                0x00000000080005c8                __libc_init_array
+ .text.memset   0x0000000008000610       0x10 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+                0x0000000008000610                memset
+ .text.strncmp  0x0000000008000620       0x28 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+                0x0000000008000620                strncmp
  *(.glue_7)
- .glue_7        0x0000000008000584        0x0 linker stubs
+ .glue_7        0x0000000008000648        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008000584        0x0 linker stubs
+ .glue_7t       0x0000000008000648        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0000000008000584        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x0000000008000648        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
  *(.init)
- .init          0x0000000008000584        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
-                0x0000000008000584                _init
- .init          0x0000000008000588        0x8 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+ .init          0x0000000008000648        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
+                0x0000000008000648                _init
+ .init          0x000000000800064c        0x8 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
  *(.fini)
- .fini          0x0000000008000590        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
-                0x0000000008000590                _fini
- .fini          0x0000000008000594        0x8 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
-                0x000000000800059c                . = ALIGN (0x4)
-                0x000000000800059c                _etext = .
+ .fini          0x0000000008000654        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
+                0x0000000008000654                _fini
+ .fini          0x0000000008000658        0x8 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+                0x0000000008000660                . = ALIGN (0x4)
+                0x0000000008000660                _etext = .
 
-.vfp11_veneer   0x000000000800059c        0x0
- .vfp11_veneer  0x000000000800059c        0x0 linker stubs
+.vfp11_veneer   0x0000000008000660        0x0
+ .vfp11_veneer  0x0000000008000660        0x0 linker stubs
 
-.v4_bx          0x000000000800059c        0x0
- .v4_bx         0x000000000800059c        0x0 linker stubs
+.v4_bx          0x0000000008000660        0x0
+ .v4_bx         0x0000000008000660        0x0 linker stubs
 
-.iplt           0x000000000800059c        0x0
- .iplt          0x000000000800059c        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x0000000008000660        0x0
+ .iplt          0x0000000008000660        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.rodata         0x000000000800059c        0x4
-                0x000000000800059c                . = ALIGN (0x4)
+.rodata         0x0000000008000660       0x5c
+                0x0000000008000660                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
+ .rodata.ExecuteCommand.str1.4
+                0x0000000008000660       0x55 build/main.o
+ *fill*         0x00000000080006b5        0x3 
  .rodata.SendString.str1.4
-                0x000000000800059c        0x3 build/usart.o
-                0x00000000080005a0                . = ALIGN (0x4)
- *fill*         0x000000000800059f        0x1 
+                0x00000000080006b8        0x3 build/usart.o
+                0x00000000080006bc                . = ALIGN (0x4)
+ *fill*         0x00000000080006bb        0x1 
 
-.rel.dyn        0x00000000080005a0        0x0
- .rel.iplt      0x00000000080005a0        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x00000000080006bc        0x0
+ .rel.iplt      0x00000000080006bc        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00000000080005a0        0x0
-                0x00000000080005a0                __exidx_start = .
+.ARM            0x00000000080006bc        0x0
+                0x00000000080006bc                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080005a0                __exidx_end = .
+                0x00000000080006bc                __exidx_end = .
 
-.preinit_array  0x00000000080005a0        0x0
-                0x00000000080005a0                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x00000000080006bc        0x0
+                0x00000000080006bc                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x00000000080005a0                PROVIDE (__preinit_array_end = .)
+                0x00000000080006bc                PROVIDE (__preinit_array_end = .)
 
-.init_array     0x00000000080005a0        0x4
-                0x00000000080005a0                PROVIDE (__init_array_start = .)
+.init_array     0x00000000080006bc        0x4
+                0x00000000080006bc                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x00000000080005a0        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
-                0x00000000080005a4                PROVIDE (__init_array_end = .)
+ .init_array    0x00000000080006bc        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+                0x00000000080006c0                PROVIDE (__init_array_end = .)
 
-.fini_array     0x00000000080005a4        0x4
+.fini_array     0x00000000080006c0        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080005a4        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+ .fini_array    0x00000000080006c0        0x4 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000080005a8                _sidata = LOADADDR (.data)
+                0x00000000080006c4                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x0 load address 0x00000000080005a8
+.data           0x0000000020000000        0x0 load address 0x00000000080006c4
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -362,11 +371,11 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _edata = .
 
-.igot.plt       0x0000000020000000        0x0 load address 0x00000000080005a8
+.igot.plt       0x0000000020000000        0x0 load address 0x00000000080006c4
  .igot.plt      0x0000000020000000        0x0 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
                 0x0000000020000000                . = ALIGN (0x4)
 
-.bss            0x0000000020000000      0x120 load address 0x00000000080005a8
+.bss            0x0000000020000000      0x220 load address 0x00000000080006c4
                 0x0000000020000000                _sbss = .
                 0x0000000020000000                __bss_start__ = _sbss
  *(.bss)
@@ -378,21 +387,23 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
  *fill*         0x000000002000001d        0x3 
  .bss.RxBuffer  0x0000000020000020      0x100 build/main.o
                 0x0000000020000020                RxBuffer
+ .bss.TxBuffer  0x0000000020000120      0x100 build/main.o
+                0x0000000020000120                TxBuffer
  *(COMMON)
-                0x0000000020000120                . = ALIGN (0x4)
-                0x0000000020000120                _ebss = .
-                0x0000000020000120                __bss_end__ = _ebss
+                0x0000000020000220                . = ALIGN (0x4)
+                0x0000000020000220                _ebss = .
+                0x0000000020000220                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020000120      0x600 load address 0x00000000080005a8
-                0x0000000020000120                . = ALIGN (0x8)
+                0x0000000020000220      0x600 load address 0x00000000080006c4
+                0x0000000020000220                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
-                0x0000000020000320                . = (. + _Min_Heap_Size)
- *fill*         0x0000000020000120      0x200 
-                0x0000000020000720                . = (. + _Min_Stack_Size)
- *fill*         0x0000000020000320      0x400 
-                0x0000000020000720                . = ALIGN (0x8)
+                0x0000000020000420                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020000220      0x200 
+                0x0000000020000820                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020000420      0x400 
+                0x0000000020000820                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -431,34 +442,36 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
  .ARM.attributes
                 0x000000000000022d       0x17 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen.o)
  .ARM.attributes
-                0x0000000000000244       0x1d /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+                0x0000000000000244       0x2d /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+ .ARM.attributes
+                0x0000000000000271       0x1d /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
 OUTPUT(build/Lab2_3_Interrupts_UART.elf elf32-littlearm)
 LOAD linker stubs
 LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a
 LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libm.a
 LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x0000000000000000     0x284c
- .debug_info    0x0000000000000000      0x27b build/main.o
- .debug_info    0x000000000000027b      0x8d3 build/gpio.o
- .debug_info    0x0000000000000b4e      0x892 build/tim.o
- .debug_info    0x00000000000013e0      0x272 build/rcc.o
- .debug_info    0x0000000000001652      0x4ab build/it.o
- .debug_info    0x0000000000001afd      0x912 build/usart.o
- .debug_info    0x000000000000240f      0x136 build/stm32l1xx_it.o
- .debug_info    0x0000000000002545      0x2e5 build/system_stm32l1xx.o
- .debug_info    0x000000000000282a       0x22 build/startup_stm32l152xc.o
+.debug_info     0x0000000000000000     0x2a4f
+ .debug_info    0x0000000000000000      0x47e build/main.o
+ .debug_info    0x000000000000047e      0x8d3 build/gpio.o
+ .debug_info    0x0000000000000d51      0x892 build/tim.o
+ .debug_info    0x00000000000015e3      0x272 build/rcc.o
+ .debug_info    0x0000000000001855      0x4ab build/it.o
+ .debug_info    0x0000000000001d00      0x912 build/usart.o
+ .debug_info    0x0000000000002612      0x136 build/stm32l1xx_it.o
+ .debug_info    0x0000000000002748      0x2e5 build/system_stm32l1xx.o
+ .debug_info    0x0000000000002a2d       0x22 build/startup_stm32l152xc.o
 
-.debug_abbrev   0x0000000000000000      0x940
- .debug_abbrev  0x0000000000000000      0x13b build/main.o
- .debug_abbrev  0x000000000000013b      0x17b build/gpio.o
- .debug_abbrev  0x00000000000002b6      0x161 build/tim.o
- .debug_abbrev  0x0000000000000417       0xae build/rcc.o
- .debug_abbrev  0x00000000000004c5      0x123 build/it.o
- .debug_abbrev  0x00000000000005e8      0x1e5 build/usart.o
- .debug_abbrev  0x00000000000007cd       0x46 build/stm32l1xx_it.o
- .debug_abbrev  0x0000000000000813      0x11b build/system_stm32l1xx.o
- .debug_abbrev  0x000000000000092e       0x12 build/startup_stm32l152xc.o
+.debug_abbrev   0x0000000000000000      0x980
+ .debug_abbrev  0x0000000000000000      0x17b build/main.o
+ .debug_abbrev  0x000000000000017b      0x17b build/gpio.o
+ .debug_abbrev  0x00000000000002f6      0x161 build/tim.o
+ .debug_abbrev  0x0000000000000457       0xae build/rcc.o
+ .debug_abbrev  0x0000000000000505      0x123 build/it.o
+ .debug_abbrev  0x0000000000000628      0x1e5 build/usart.o
+ .debug_abbrev  0x000000000000080d       0x46 build/stm32l1xx_it.o
+ .debug_abbrev  0x0000000000000853      0x11b build/system_stm32l1xx.o
+ .debug_abbrev  0x000000000000096e       0x12 build/startup_stm32l152xc.o
 
 .debug_loc      0x0000000000000000      0x3fa
  .debug_loc     0x0000000000000000       0x6c build/main.o
@@ -499,35 +512,35 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
  .debug_ranges  0x00000000000000f8       0x18 build/system_stm32l1xx.o
  .debug_ranges  0x0000000000000110       0x20 build/startup_stm32l152xc.o
 
-.debug_line     0x0000000000000000     0x1177
- .debug_line    0x0000000000000000      0x1c7 build/main.o
- .debug_line    0x00000000000001c7      0x20c build/gpio.o
- .debug_line    0x00000000000003d3      0x1c8 build/tim.o
- .debug_line    0x000000000000059b      0x28c build/rcc.o
- .debug_line    0x0000000000000827      0x24b build/it.o
- .debug_line    0x0000000000000a72      0x30d build/usart.o
- .debug_line    0x0000000000000d7f      0x138 build/stm32l1xx_it.o
- .debug_line    0x0000000000000eb7      0x24b build/system_stm32l1xx.o
- .debug_line    0x0000000000001102       0x75 build/startup_stm32l152xc.o
+.debug_line     0x0000000000000000     0x124d
+ .debug_line    0x0000000000000000      0x29f build/main.o
+ .debug_line    0x000000000000029f      0x20c build/gpio.o
+ .debug_line    0x00000000000004ab      0x1c8 build/tim.o
+ .debug_line    0x0000000000000673      0x28c build/rcc.o
+ .debug_line    0x00000000000008ff      0x24b build/it.o
+ .debug_line    0x0000000000000b4a      0x30b build/usart.o
+ .debug_line    0x0000000000000e55      0x138 build/stm32l1xx_it.o
+ .debug_line    0x0000000000000f8d      0x24b build/system_stm32l1xx.o
+ .debug_line    0x00000000000011d8       0x75 build/startup_stm32l152xc.o
 
-.debug_str      0x0000000000000000      0x9a2
- .debug_str     0x0000000000000000      0x1e6 build/main.o
-                                        0x22f (size before relaxing)
- .debug_str     0x00000000000001e6      0x52a build/gpio.o
+.debug_str      0x0000000000000000      0x9aa
+ .debug_str     0x0000000000000000      0x244 build/main.o
+                                        0x28d (size before relaxing)
+ .debug_str     0x0000000000000244      0x52a build/gpio.o
                                         0x6c1 (size before relaxing)
- .debug_str     0x0000000000000710       0x65 build/tim.o
+ .debug_str     0x000000000000076e        0xf build/tim.o
                                         0x6a2 (size before relaxing)
- .debug_str     0x0000000000000775       0x55 build/rcc.o
+ .debug_str     0x000000000000077d       0x55 build/rcc.o
                                         0x236 (size before relaxing)
- .debug_str     0x00000000000007ca       0x54 build/it.o
+ .debug_str     0x00000000000007d2       0x54 build/it.o
                                         0x2b8 (size before relaxing)
- .debug_str     0x000000000000081e       0x22 build/usart.o
+ .debug_str     0x0000000000000826       0x22 build/usart.o
                                         0x6c8 (size before relaxing)
- .debug_str     0x0000000000000840       0xa8 build/stm32l1xx_it.o
+ .debug_str     0x0000000000000848       0xa8 build/stm32l1xx_it.o
                                         0x204 (size before relaxing)
- .debug_str     0x00000000000008e8       0x96 build/system_stm32l1xx.o
+ .debug_str     0x00000000000008f0       0x96 build/system_stm32l1xx.o
                                         0x27d (size before relaxing)
- .debug_str     0x000000000000097e       0x24 build/startup_stm32l152xc.o
+ .debug_str     0x0000000000000986       0x24 build/startup_stm32l152xc.o
                                          0x6d (size before relaxing)
 
 .comment        0x0000000000000000       0x49
@@ -541,7 +554,7 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
  .comment       0x0000000000000049       0x4a build/stm32l1xx_it.o
  .comment       0x0000000000000049       0x4a build/system_stm32l1xx.o
 
-.debug_frame    0x0000000000000000      0x278
+.debug_frame    0x0000000000000000      0x2a0
  .debug_frame   0x0000000000000000       0x5c build/main.o
  .debug_frame   0x000000000000005c       0x30 build/gpio.o
  .debug_frame   0x000000000000008c       0x20 build/tim.o
@@ -552,6 +565,7 @@ LOAD /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-
  .debug_frame   0x00000000000001fc       0x30 build/system_stm32l1xx.o
  .debug_frame   0x000000000000022c       0x2c /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
  .debug_frame   0x0000000000000258       0x20 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000278       0x28 /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
 
 Cross Reference Table
 
@@ -691,6 +705,8 @@ software_init_hook                                /home/seradya/toolchains/gcc-a
 strlen                                            /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen.o)
                                                   build/usart.o
                                                   build/it.o
+strncmp                                           /home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strncmp.o)
+                                                  build/main.o
 sysclk_init                                       build/rcc.o
                                                   build/main.o
 tim2_init                                         build/tim.o
