@@ -23,3 +23,4 @@
 
 ## Источники
 https://github.com/Leonidov/STM32-Labs/tree/master/Lab%202%20-%20Interrupts
+https://github.com/Leonidov/STM32-Labs/tree/master/Lab%203%20-%20UART%2BDMA
