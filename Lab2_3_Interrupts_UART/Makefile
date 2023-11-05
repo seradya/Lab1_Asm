@@ -41,6 +41,7 @@ Core/Src/gpio.c \
 Core/Src/tim.c \
 Core/Src/rcc.c \
 Core/Src/it.c \
+Core/Src/usart.c \
 Core/Src/stm32l1xx_it.c \
 Core/Src/system_stm32l1xx.c  
 

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchkmm94.s 			page 1
+ARM GAS  /tmp/ccu0UmXd.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -13,146 +13,150 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
   10              		.eabi_attribute 30, 1
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
-  13              		.file	"gpio.c"
+  13              		.file	"usart.c"
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.led_init,"ax",%progbits
+  17              		.section	.text.usart_init,"ax",%progbits
   18              		.align	1
-  19              		.global	led_init
+  19              		.global	usart_init
   20              		.syntax unified
   21              		.thumb
   22              		.thumb_func
-  24              	led_init:
+  24              	usart_init:
   25              	.LFB72:
-  26              		.file 1 "Core/Src/gpio.c"
-   1:Core/Src/gpio.c **** 
-   2:Core/Src/gpio.c **** #include "stm32l1xx.h"
-   3:Core/Src/gpio.c **** #include "gpio.h"
-   4:Core/Src/gpio.c **** 
-   5:Core/Src/gpio.c **** void led_init(void)
-   6:Core/Src/gpio.c **** {
-  27              		.loc 1 6 1 view -0
+  26              		.file 1 "Core/Src/usart.c"
+   1:Core/Src/usart.c **** 
+   2:Core/Src/usart.c **** #include "stm32l1xx.h"
+   3:Core/Src/usart.c **** #include "usart.h"
+   4:Core/Src/usart.c **** #include "string.h"
+   5:Core/Src/usart.c **** 
+   6:Core/Src/usart.c **** 
+   7:Core/Src/usart.c **** 
+   8:Core/Src/usart.c **** void usart_init(void)
+   9:Core/Src/usart.c **** {
+  27              		.loc 1 9 1 view -0
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              		@ link register save eliminated.
-   7:Core/Src/gpio.c ****     //PB7
-   8:Core/Src/gpio.c ****     RCC->AHBENR |= RCC_AHBENR_GPIOBEN;              //Clock enable for GPIOB
-  32              		.loc 1 8 5 view .LVU1
-  33              		.loc 1 8 17 is_stmt 0 view .LVU2
-  34 0000 074A     		ldr	r2, .L2
-  35 0002 D369     		ldr	r3, [r2, #28]
-  36 0004 43F00203 		orr	r3, r3, #2
-  37 0008 D361     		str	r3, [r2, #28]
-   9:Core/Src/gpio.c **** 
-  10:Core/Src/gpio.c ****     GPIOB->MODER &= ~GPIO_MODER_MODER7;              //Reset PB7 bits in GPIO_MODER register
-  38              		.loc 1 10 5 is_stmt 1 view .LVU3
-  39              		.loc 1 10 18 is_stmt 0 view .LVU4
-  40 000a 064B     		ldr	r3, .L2+4
-  41 000c 1A68     		ldr	r2, [r3]
-  42 000e 22F44042 		bic	r2, r2, #49152
-  43 0012 1A60     		str	r2, [r3]
-  11:Core/Src/gpio.c ****     GPIOB->MODER |= GPIO_MODER_MODER7_0;            //Enable output mode for PB7
-  44              		.loc 1 11 5 is_stmt 1 view .LVU5
-  45              		.loc 1 11 18 is_stmt 0 view .LVU6
-  46 0014 1A68     		ldr	r2, [r3]
-  47 0016 42F48042 		orr	r2, r2, #16384
-ARM GAS  /tmp/cchkmm94.s 			page 2
+  10:Core/Src/usart.c ****     //PA2 - Tx, PA3 -Rx
+  11:Core/Src/usart.c ****     RCC->APB1ENR |= RCC_APB1ENR_USART2EN;       //Clock enable for usart2 
+  32              		.loc 1 11 5 view .LVU1
+  33              		.loc 1 11 18 is_stmt 0 view .LVU2
+  34 0000 234B     		ldr	r3, .L2
+  35 0002 5A6A     		ldr	r2, [r3, #36]
+  36 0004 42F40032 		orr	r2, r2, #131072
+  37 0008 5A62     		str	r2, [r3, #36]
+  12:Core/Src/usart.c ****     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;          //Clock enable for GPIOA
+  38              		.loc 1 12 5 is_stmt 1 view .LVU3
+  39              		.loc 1 12 17 is_stmt 0 view .LVU4
+  40 000a DA69     		ldr	r2, [r3, #28]
+  41 000c 42F00102 		orr	r2, r2, #1
+  42 0010 DA61     		str	r2, [r3, #28]
+  13:Core/Src/usart.c **** 
+  14:Core/Src/usart.c ****     GPIOA->MODER &= ~GPIO_MODER_MODER2;         //PA2 Mode bits reset
+  43              		.loc 1 14 5 is_stmt 1 view .LVU5
+  44              		.loc 1 14 18 is_stmt 0 view .LVU6
+ARM GAS  /tmp/ccu0UmXd.s 			page 2
 
 
-  48 001a 1A60     		str	r2, [r3]
-  12:Core/Src/gpio.c **** 
-  13:Core/Src/gpio.c **** }
-  49              		.loc 1 13 1 view .LVU7
-  50 001c 7047     		bx	lr
-  51              	.L3:
-  52 001e 00BF     		.align	2
-  53              	.L2:
-  54 0020 00380240 		.word	1073887232
-  55 0024 00040240 		.word	1073873920
-  56              		.cfi_endproc
-  57              	.LFE72:
-  59              		.section	.text.btn_init,"ax",%progbits
-  60              		.align	1
-  61              		.global	btn_init
-  62              		.syntax unified
-  63              		.thumb
-  64              		.thumb_func
-  66              	btn_init:
-  67              	.LFB73:
-  14:Core/Src/gpio.c **** 
-  15:Core/Src/gpio.c **** void btn_init(void)
-  16:Core/Src/gpio.c **** {
-  68              		.loc 1 16 1 is_stmt 1 view -0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 0
-  71              		@ frame_needed = 0, uses_anonymous_args = 0
-  72              		@ link register save eliminated.
-  17:Core/Src/gpio.c ****     //PA0
-  18:Core/Src/gpio.c ****     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;              //Clock enable for GPIOA
-  73              		.loc 1 18 5 view .LVU9
-  74              		.loc 1 18 17 is_stmt 0 view .LVU10
-  75 0000 154B     		ldr	r3, .L5
-  76 0002 DA69     		ldr	r2, [r3, #28]
-  77 0004 42F00102 		orr	r2, r2, #1
-  78 0008 DA61     		str	r2, [r3, #28]
-  19:Core/Src/gpio.c ****     GPIOA->MODER &= ~GPIO_MODER_MODER0;              //Enable input mode 
-  79              		.loc 1 19 5 is_stmt 1 view .LVU11
-  80              		.loc 1 19 18 is_stmt 0 view .LVU12
-  81 000a 144A     		ldr	r2, .L5+4
-  82 000c 1168     		ldr	r1, [r2]
-  83 000e 21F00301 		bic	r1, r1, #3
-  84 0012 1160     		str	r1, [r2]
-  20:Core/Src/gpio.c ****     GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR0;              //No pull-up, no pull down
-  85              		.loc 1 20 5 is_stmt 1 view .LVU13
-  86              		.loc 1 20 18 is_stmt 0 view .LVU14
-  87 0014 D168     		ldr	r1, [r2, #12]
-  88 0016 21F00301 		bic	r1, r1, #3
-  89 001a D160     		str	r1, [r2, #12]
-  21:Core/Src/gpio.c **** 
-  22:Core/Src/gpio.c ****     EXTI->IMR |= EXTI_IMR_MR0;                      //Interrupt request from line 0 is not masked
-  90              		.loc 1 22 5 is_stmt 1 view .LVU15
-  91              		.loc 1 22 15 is_stmt 0 view .LVU16
-  92 001c A2F57C42 		sub	r2, r2, #64512
-  93 0020 1168     		ldr	r1, [r2]
-  94 0022 41F00101 		orr	r1, r1, #1
-  95 0026 1160     		str	r1, [r2]
-ARM GAS  /tmp/cchkmm94.s 			page 3
+  45 0012 A3F56053 		sub	r3, r3, #14336
+  46 0016 1A68     		ldr	r2, [r3]
+  47 0018 22F03002 		bic	r2, r2, #48
+  48 001c 1A60     		str	r2, [r3]
+  15:Core/Src/usart.c ****     GPIOA->MODER &= ~GPIO_MODER_MODER3;         //PA3 Mode bits reset
+  49              		.loc 1 15 5 is_stmt 1 view .LVU7
+  50              		.loc 1 15 18 is_stmt 0 view .LVU8
+  51 001e 1A68     		ldr	r2, [r3]
+  52 0020 22F0C002 		bic	r2, r2, #192
+  53 0024 1A60     		str	r2, [r3]
+  16:Core/Src/usart.c ****     GPIOA->MODER |= GPIO_MODER_MODER2_1;        //PA2 alternate function
+  54              		.loc 1 16 5 is_stmt 1 view .LVU9
+  55              		.loc 1 16 18 is_stmt 0 view .LVU10
+  56 0026 1A68     		ldr	r2, [r3]
+  57 0028 42F02002 		orr	r2, r2, #32
+  58 002c 1A60     		str	r2, [r3]
+  17:Core/Src/usart.c ****     GPIOA->MODER |= GPIO_MODER_MODER3_1;        //PA2 alternate function
+  59              		.loc 1 17 5 is_stmt 1 view .LVU11
+  60              		.loc 1 17 18 is_stmt 0 view .LVU12
+  61 002e 1A68     		ldr	r2, [r3]
+  62 0030 42F08002 		orr	r2, r2, #128
+  63 0034 1A60     		str	r2, [r3]
+  18:Core/Src/usart.c ****     GPIOA->AFR[0] &=  ~GPIO_AFRL_AFSEL2;        //GPIO AFRL PA2 reset bits
+  64              		.loc 1 18 5 is_stmt 1 view .LVU13
+  65              		.loc 1 18 19 is_stmt 0 view .LVU14
+  66 0036 1A6A     		ldr	r2, [r3, #32]
+  67 0038 22F47062 		bic	r2, r2, #3840
+  68 003c 1A62     		str	r2, [r3, #32]
+  19:Core/Src/usart.c ****     GPIOA->AFR[0] &=  ~GPIO_AFRL_AFSEL3;        //GPIO AFRL PA2 reset bits         
+  69              		.loc 1 19 5 is_stmt 1 view .LVU15
+  70              		.loc 1 19 19 is_stmt 0 view .LVU16
+  71 003e 1A6A     		ldr	r2, [r3, #32]
+  72 0040 22F47042 		bic	r2, r2, #61440
+  73 0044 1A62     		str	r2, [r3, #32]
+  20:Core/Src/usart.c ****     GPIOA->AFR[0] |= 0x7 << 8;                  //Set AF7 for port 2
+  74              		.loc 1 20 5 is_stmt 1 view .LVU17
+  75              		.loc 1 20 19 is_stmt 0 view .LVU18
+  76 0046 1A6A     		ldr	r2, [r3, #32]
+  77 0048 42F4E062 		orr	r2, r2, #1792
+  78 004c 1A62     		str	r2, [r3, #32]
+  21:Core/Src/usart.c ****     GPIOA->AFR[0] |= 0x7 << 12;                 //Set AF7 for port 3
+  79              		.loc 1 21 5 is_stmt 1 view .LVU19
+  80              		.loc 1 21 19 is_stmt 0 view .LVU20
+  81 004e 1A6A     		ldr	r2, [r3, #32]
+  82 0050 42F4E042 		orr	r2, r2, #28672
+  83 0054 1A62     		str	r2, [r3, #32]
+  22:Core/Src/usart.c ****     
+  23:Core/Src/usart.c ****     
+  24:Core/Src/usart.c ****     //GPIOA->MODER &= ~GPIO_MODER_MODER3;         //Enable input mode for PA3 
+  25:Core/Src/usart.c ****     //GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR3;         //No pull-up, no pull down for PA3
+  26:Core/Src/usart.c ****     /*
+  27:Core/Src/usart.c ****     GPIOA->MODER &= ~GPIO_MODER_MODER2;         //Reset PA2 bits in GPIO_MODER register
+  28:Core/Src/usart.c ****     GPIOA->MODER |= GPIO_MODER_MODER2_0;        //Enable output mode for PA2
+  29:Core/Src/usart.c ****     */
+  30:Core/Src/usart.c ****     //APB2 CLK = 32 MHx => BRR value = 17.4
+  31:Core/Src/usart.c ****     //17 = 0x11; 0.4*16 = 6.4 => 0x116
+  32:Core/Src/usart.c ****     USART2->BRR = 0x116;                        //Baud rate register value
+ARM GAS  /tmp/ccu0UmXd.s 			page 3
 
 
-  23:Core/Src/gpio.c ****     EXTI->RTSR |= EXTI_RTSR_TR0;                    //Rising edge trigger enable for line 0
-  96              		.loc 1 23 5 is_stmt 1 view .LVU17
-  97              		.loc 1 23 16 is_stmt 0 view .LVU18
-  98 0028 9168     		ldr	r1, [r2, #8]
-  99 002a 41F00101 		orr	r1, r1, #1
- 100 002e 9160     		str	r1, [r2, #8]
-  24:Core/Src/gpio.c **** 
-  25:Core/Src/gpio.c ****     RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;           //System configuraton controller clock enable
- 101              		.loc 1 25 5 is_stmt 1 view .LVU19
- 102              		.loc 1 25 18 is_stmt 0 view .LVU20
- 103 0030 1A6A     		ldr	r2, [r3, #32]
- 104 0032 42F00102 		orr	r2, r2, #1
- 105 0036 1A62     		str	r2, [r3, #32]
-  26:Core/Src/gpio.c ****     SYSCFG->EXTICR[0] &= ~SYSCFG_EXTICR1_EXTI0;     //Reset EXTI0 bits
- 106              		.loc 1 26 5 is_stmt 1 view .LVU21
- 107              		.loc 1 26 23 is_stmt 0 view .LVU22
- 108 0038 A3F59C33 		sub	r3, r3, #79872
- 109 003c 9A68     		ldr	r2, [r3, #8]
- 110 003e 22F00F02 		bic	r2, r2, #15
- 111 0042 9A60     		str	r2, [r3, #8]
-  27:Core/Src/gpio.c ****     SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI0_PA;   //Select PAx source for EXTI0
- 112              		.loc 1 27 5 is_stmt 1 view .LVU23
- 113              		.loc 1 27 23 is_stmt 0 view .LVU24
- 114 0044 9A68     		ldr	r2, [r3, #8]
- 115 0046 9A60     		str	r2, [r3, #8]
-  28:Core/Src/gpio.c ****     
-  29:Core/Src/gpio.c ****     NVIC_SetPriority(EXTI0_IRQn, 2);
- 116              		.loc 1 29 5 is_stmt 1 view .LVU25
- 117              	.LVL0:
- 118              	.LBB6:
- 119              	.LBI6:
- 120              		.file 2 "Drivers/CMSIS/Include/core_cm3.h"
+  84              		.loc 1 32 5 is_stmt 1 view .LVU21
+  85              		.loc 1 32 17 is_stmt 0 view .LVU22
+  86 0056 A3F5DE33 		sub	r3, r3, #113664
+  87 005a 4FF48B72 		mov	r2, #278
+  88 005e 9A60     		str	r2, [r3, #8]
+  33:Core/Src/usart.c ****     USART2->CR1 |= USART_CR1_TE;                //Enable transmitter
+  89              		.loc 1 33 5 is_stmt 1 view .LVU23
+  90              		.loc 1 33 17 is_stmt 0 view .LVU24
+  91 0060 DA68     		ldr	r2, [r3, #12]
+  92 0062 42F00802 		orr	r2, r2, #8
+  93 0066 DA60     		str	r2, [r3, #12]
+  34:Core/Src/usart.c ****     USART2->CR1 |= USART_CR1_RE;                //Enable reciever
+  94              		.loc 1 34 5 is_stmt 1 view .LVU25
+  95              		.loc 1 34 17 is_stmt 0 view .LVU26
+  96 0068 DA68     		ldr	r2, [r3, #12]
+  97 006a 42F00402 		orr	r2, r2, #4
+  98 006e DA60     		str	r2, [r3, #12]
+  35:Core/Src/usart.c ****     USART2->CR1 |= USART_CR1_UE;                //Enable USART
+  99              		.loc 1 35 5 is_stmt 1 view .LVU27
+ 100              		.loc 1 35 17 is_stmt 0 view .LVU28
+ 101 0070 DA68     		ldr	r2, [r3, #12]
+ 102 0072 42F40052 		orr	r2, r2, #8192
+ 103 0076 DA60     		str	r2, [r3, #12]
+  36:Core/Src/usart.c ****     USART2->CR1 |= USART_CR1_RXNEIE;            //Enbale interrupt when rx not empty
+ 104              		.loc 1 36 5 is_stmt 1 view .LVU29
+ 105              		.loc 1 36 17 is_stmt 0 view .LVU30
+ 106 0078 DA68     		ldr	r2, [r3, #12]
+ 107 007a 42F02002 		orr	r2, r2, #32
+ 108 007e DA60     		str	r2, [r3, #12]
+  37:Core/Src/usart.c **** 
+  38:Core/Src/usart.c ****     NVIC_SetPriority(USART2_IRQn, 1);
+ 109              		.loc 1 38 5 is_stmt 1 view .LVU31
+ 110              	.LVL0:
+ 111              	.LBB6:
+ 112              	.LBI6:
+ 113              		.file 2 "Drivers/CMSIS/Include/core_cm3.h"
    1:Drivers/CMSIS/Include/core_cm3.h **** /**************************************************************************//**
    2:Drivers/CMSIS/Include/core_cm3.h ****  * @file     core_cm3.h
    3:Drivers/CMSIS/Include/core_cm3.h ****  * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
@@ -174,13 +178,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
   19:Drivers/CMSIS/Include/core_cm3.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
   20:Drivers/CMSIS/Include/core_cm3.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   21:Drivers/CMSIS/Include/core_cm3.h ****  * See the License for the specific language governing permissions and
+ARM GAS  /tmp/ccu0UmXd.s 			page 4
+
+
   22:Drivers/CMSIS/Include/core_cm3.h ****  * limitations under the License.
   23:Drivers/CMSIS/Include/core_cm3.h ****  */
   24:Drivers/CMSIS/Include/core_cm3.h **** 
   25:Drivers/CMSIS/Include/core_cm3.h **** #if   defined ( __ICCARM__ )
-ARM GAS  /tmp/cchkmm94.s 			page 4
-
-
   26:Drivers/CMSIS/Include/core_cm3.h ****   #pragma system_include         /* treat file as system include file for MISRA check */
   27:Drivers/CMSIS/Include/core_cm3.h **** #elif defined (__clang__)
   28:Drivers/CMSIS/Include/core_cm3.h ****   #pragma clang system_header   /* treat file as system include file */
@@ -234,13 +238,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
   76:Drivers/CMSIS/Include/core_cm3.h **** #define __FPU_USED       0U
   77:Drivers/CMSIS/Include/core_cm3.h **** 
   78:Drivers/CMSIS/Include/core_cm3.h **** #if defined ( __CC_ARM )
+ARM GAS  /tmp/ccu0UmXd.s 			page 5
+
+
   79:Drivers/CMSIS/Include/core_cm3.h ****   #if defined __TARGET_FPU_VFP
   80:Drivers/CMSIS/Include/core_cm3.h ****     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   81:Drivers/CMSIS/Include/core_cm3.h ****   #endif
   82:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 5
-
-
   83:Drivers/CMSIS/Include/core_cm3.h **** #elif defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
   84:Drivers/CMSIS/Include/core_cm3.h ****   #if defined __ARM_PCS_VFP
   85:Drivers/CMSIS/Include/core_cm3.h ****     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
@@ -294,13 +298,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  133:Drivers/CMSIS/Include/core_cm3.h **** /* check device defines and use defaults */
  134:Drivers/CMSIS/Include/core_cm3.h **** #if defined __CHECK_DEVICE_DEFINES
  135:Drivers/CMSIS/Include/core_cm3.h ****   #ifndef __CM3_REV
+ARM GAS  /tmp/ccu0UmXd.s 			page 6
+
+
  136:Drivers/CMSIS/Include/core_cm3.h ****     #define __CM3_REV               0x0200U
  137:Drivers/CMSIS/Include/core_cm3.h ****     #warning "__CM3_REV not defined in device header file; using default!"
  138:Drivers/CMSIS/Include/core_cm3.h ****   #endif
  139:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 6
-
-
  140:Drivers/CMSIS/Include/core_cm3.h ****   #ifndef __MPU_PRESENT
  141:Drivers/CMSIS/Include/core_cm3.h ****     #define __MPU_PRESENT             0U
  142:Drivers/CMSIS/Include/core_cm3.h ****     #warning "__MPU_PRESENT not defined in device header file; using default!"
@@ -354,13 +358,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  190:Drivers/CMSIS/Include/core_cm3.h ****  ******************************************************************************/
  191:Drivers/CMSIS/Include/core_cm3.h **** /**
  192:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup CMSIS_core_register Defines and Type Definitions
+ARM GAS  /tmp/ccu0UmXd.s 			page 7
+
+
  193:Drivers/CMSIS/Include/core_cm3.h ****   \brief Type definitions and defines for Cortex-M processor based devices.
  194:Drivers/CMSIS/Include/core_cm3.h **** */
  195:Drivers/CMSIS/Include/core_cm3.h **** 
  196:Drivers/CMSIS/Include/core_cm3.h **** /**
-ARM GAS  /tmp/cchkmm94.s 			page 7
-
-
  197:Drivers/CMSIS/Include/core_cm3.h ****   \ingroup    CMSIS_core_register
  198:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup   CMSIS_CORE  Status and Control Registers
  199:Drivers/CMSIS/Include/core_cm3.h ****   \brief      Core Register type definitions.
@@ -414,13 +418,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  247:Drivers/CMSIS/Include/core_cm3.h ****   uint32_t w;                            /*!< Type      used for word access */
  248:Drivers/CMSIS/Include/core_cm3.h **** } IPSR_Type;
  249:Drivers/CMSIS/Include/core_cm3.h **** 
+ARM GAS  /tmp/ccu0UmXd.s 			page 8
+
+
  250:Drivers/CMSIS/Include/core_cm3.h **** /* IPSR Register Definitions */
  251:Drivers/CMSIS/Include/core_cm3.h **** #define IPSR_ISR_Pos                        0U                                            /*!< IPSR
  252:Drivers/CMSIS/Include/core_cm3.h **** #define IPSR_ISR_Msk                       (0x1FFUL /*<< IPSR_ISR_Pos*/)                  /*!< IPSR
  253:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 8
-
-
  254:Drivers/CMSIS/Include/core_cm3.h **** 
  255:Drivers/CMSIS/Include/core_cm3.h **** /**
  256:Drivers/CMSIS/Include/core_cm3.h ****   \brief  Union type to access the Special-Purpose Program Status Registers (xPSR).
@@ -474,13 +478,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  304:Drivers/CMSIS/Include/core_cm3.h **** 
  305:Drivers/CMSIS/Include/core_cm3.h **** 
  306:Drivers/CMSIS/Include/core_cm3.h **** /**
+ARM GAS  /tmp/ccu0UmXd.s 			page 9
+
+
  307:Drivers/CMSIS/Include/core_cm3.h ****   \brief  Union type to access the Control Registers (CONTROL).
  308:Drivers/CMSIS/Include/core_cm3.h ****  */
  309:Drivers/CMSIS/Include/core_cm3.h **** typedef union
  310:Drivers/CMSIS/Include/core_cm3.h **** {
-ARM GAS  /tmp/cchkmm94.s 			page 9
-
-
  311:Drivers/CMSIS/Include/core_cm3.h ****   struct
  312:Drivers/CMSIS/Include/core_cm3.h ****   {
  313:Drivers/CMSIS/Include/core_cm3.h ****     uint32_t nPRIV:1;                    /*!< bit:      0  Execution privilege in Thread mode */
@@ -534,13 +538,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  361:Drivers/CMSIS/Include/core_cm3.h **** /*@} end of group CMSIS_NVIC */
  362:Drivers/CMSIS/Include/core_cm3.h **** 
  363:Drivers/CMSIS/Include/core_cm3.h **** 
+ARM GAS  /tmp/ccu0UmXd.s 			page 10
+
+
  364:Drivers/CMSIS/Include/core_cm3.h **** /**
  365:Drivers/CMSIS/Include/core_cm3.h ****   \ingroup  CMSIS_core_register
  366:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup CMSIS_SCB     System Control Block (SCB)
  367:Drivers/CMSIS/Include/core_cm3.h ****   \brief    Type definitions for the System Control Block Registers
-ARM GAS  /tmp/cchkmm94.s 			page 10
-
-
  368:Drivers/CMSIS/Include/core_cm3.h ****   @{
  369:Drivers/CMSIS/Include/core_cm3.h ****  */
  370:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -594,13 +598,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  418:Drivers/CMSIS/Include/core_cm3.h **** 
  419:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSVSET_Pos             28U                                            /*!< SCB 
  420:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSVSET_Msk             (1UL << SCB_ICSR_PENDSVSET_Pos)                /*!< SCB 
+ARM GAS  /tmp/ccu0UmXd.s 			page 11
+
+
  421:Drivers/CMSIS/Include/core_cm3.h **** 
  422:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSVCLR_Pos             27U                                            /*!< SCB 
  423:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSVCLR_Msk             (1UL << SCB_ICSR_PENDSVCLR_Pos)                /*!< SCB 
  424:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 11
-
-
  425:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSTSET_Pos             26U                                            /*!< SCB 
  426:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_ICSR_PENDSTSET_Msk             (1UL << SCB_ICSR_PENDSTSET_Pos)                /*!< SCB 
  427:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -654,13 +658,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  475:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_AIRCR_VECTCLRACTIVE_Msk        (1UL << SCB_AIRCR_VECTCLRACTIVE_Pos)           /*!< SCB 
  476:Drivers/CMSIS/Include/core_cm3.h **** 
  477:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_AIRCR_VECTRESET_Pos             0U                                            /*!< SCB 
+ARM GAS  /tmp/ccu0UmXd.s 			page 12
+
+
  478:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_AIRCR_VECTRESET_Msk            (1UL /*<< SCB_AIRCR_VECTRESET_Pos*/)           /*!< SCB 
  479:Drivers/CMSIS/Include/core_cm3.h **** 
  480:Drivers/CMSIS/Include/core_cm3.h **** /* SCB System Control Register Definitions */
  481:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SCR_SEVONPEND_Pos               4U                                            /*!< SCB 
-ARM GAS  /tmp/cchkmm94.s 			page 12
-
-
  482:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SCR_SEVONPEND_Msk              (1UL << SCB_SCR_SEVONPEND_Pos)                 /*!< SCB 
  483:Drivers/CMSIS/Include/core_cm3.h **** 
  484:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SCR_SLEEPDEEP_Pos               2U                                            /*!< SCB 
@@ -714,13 +718,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  532:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_SYSTICKACT_Msk           (1UL << SCB_SHCSR_SYSTICKACT_Pos)              /*!< SCB 
  533:Drivers/CMSIS/Include/core_cm3.h **** 
  534:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_PENDSVACT_Pos            10U                                            /*!< SCB 
+ARM GAS  /tmp/ccu0UmXd.s 			page 13
+
+
  535:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_PENDSVACT_Msk            (1UL << SCB_SHCSR_PENDSVACT_Pos)               /*!< SCB 
  536:Drivers/CMSIS/Include/core_cm3.h **** 
  537:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_MONITORACT_Pos            8U                                            /*!< SCB 
  538:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_MONITORACT_Msk           (1UL << SCB_SHCSR_MONITORACT_Pos)              /*!< SCB 
-ARM GAS  /tmp/cchkmm94.s 			page 13
-
-
  539:Drivers/CMSIS/Include/core_cm3.h **** 
  540:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_SVCALLACT_Pos             7U                                            /*!< SCB 
  541:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_SHCSR_SVCALLACT_Msk            (1UL << SCB_SHCSR_SVCALLACT_Pos)               /*!< SCB 
@@ -774,13 +778,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  589:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_IMPRECISERR_Msk          (1UL << SCB_CFSR_IMPRECISERR_Pos)               /*!< SCB 
  590:Drivers/CMSIS/Include/core_cm3.h **** 
  591:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_PRECISERR_Pos            (SCB_CFSR_BUSFAULTSR_Pos + 1U)                  /*!< SCB 
+ARM GAS  /tmp/ccu0UmXd.s 			page 14
+
+
  592:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_PRECISERR_Msk            (1UL << SCB_CFSR_PRECISERR_Pos)                 /*!< SCB 
  593:Drivers/CMSIS/Include/core_cm3.h **** 
  594:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_IBUSERR_Pos              (SCB_CFSR_BUSFAULTSR_Pos + 0U)                  /*!< SCB 
  595:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_IBUSERR_Msk              (1UL << SCB_CFSR_IBUSERR_Pos)                   /*!< SCB 
-ARM GAS  /tmp/cchkmm94.s 			page 14
-
-
  596:Drivers/CMSIS/Include/core_cm3.h **** 
  597:Drivers/CMSIS/Include/core_cm3.h **** /* UsageFault Status Register (part of SCB Configurable Fault Status Register) */
  598:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_DIVBYZERO_Pos            (SCB_CFSR_USGFAULTSR_Pos + 9U)                  /*!< SCB 
@@ -834,13 +838,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  646:Drivers/CMSIS/Include/core_cm3.h ****   \ingroup  CMSIS_core_register
  647:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup CMSIS_SCnSCB System Controls not in SCB (SCnSCB)
  648:Drivers/CMSIS/Include/core_cm3.h ****   \brief    Type definitions for the System Control and ID Register not in the SCB
+ARM GAS  /tmp/ccu0UmXd.s 			page 15
+
+
  649:Drivers/CMSIS/Include/core_cm3.h ****   @{
  650:Drivers/CMSIS/Include/core_cm3.h ****  */
  651:Drivers/CMSIS/Include/core_cm3.h **** 
  652:Drivers/CMSIS/Include/core_cm3.h **** /**
-ARM GAS  /tmp/cchkmm94.s 			page 15
-
-
  653:Drivers/CMSIS/Include/core_cm3.h ****   \brief  Structure type to access the System Control and ID Register not in the SCB.
  654:Drivers/CMSIS/Include/core_cm3.h ****  */
  655:Drivers/CMSIS/Include/core_cm3.h **** typedef struct
@@ -894,13 +898,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  703:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_COUNTFLAG_Pos         16U                                            /*!< SysT
  704:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_COUNTFLAG_Msk         (1UL << SysTick_CTRL_COUNTFLAG_Pos)            /*!< SysT
  705:Drivers/CMSIS/Include/core_cm3.h **** 
+ARM GAS  /tmp/ccu0UmXd.s 			page 16
+
+
  706:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_CLKSOURCE_Pos          2U                                            /*!< SysT
  707:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_CLKSOURCE_Msk         (1UL << SysTick_CTRL_CLKSOURCE_Pos)            /*!< SysT
  708:Drivers/CMSIS/Include/core_cm3.h **** 
  709:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_TICKINT_Pos            1U                                            /*!< SysT
-ARM GAS  /tmp/cchkmm94.s 			page 16
-
-
  710:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_TICKINT_Msk           (1UL << SysTick_CTRL_TICKINT_Pos)              /*!< SysT
  711:Drivers/CMSIS/Include/core_cm3.h **** 
  712:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CTRL_ENABLE_Pos             0U                                            /*!< SysT
@@ -954,13 +958,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  760:Drivers/CMSIS/Include/core_cm3.h ****         uint32_t RESERVED3[29U];
  761:Drivers/CMSIS/Include/core_cm3.h ****   __OM  uint32_t IWR;                    /*!< Offset: 0xEF8 ( /W)  ITM Integration Write Register *
  762:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t IRR;                    /*!< Offset: 0xEFC (R/ )  ITM Integration Read Register */
+ARM GAS  /tmp/ccu0UmXd.s 			page 17
+
+
  763:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t IMCR;                   /*!< Offset: 0xF00 (R/W)  ITM Integration Mode Control Reg
  764:Drivers/CMSIS/Include/core_cm3.h ****         uint32_t RESERVED4[43U];
  765:Drivers/CMSIS/Include/core_cm3.h ****   __OM  uint32_t LAR;                    /*!< Offset: 0xFB0 ( /W)  ITM Lock Access Register */
  766:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t LSR;                    /*!< Offset: 0xFB4 (R/ )  ITM Lock Status Register */
-ARM GAS  /tmp/cchkmm94.s 			page 17
-
-
  767:Drivers/CMSIS/Include/core_cm3.h ****         uint32_t RESERVED5[6U];
  768:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t PID4;                   /*!< Offset: 0xFD0 (R/ )  ITM Peripheral Identification Re
  769:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t PID5;                   /*!< Offset: 0xFD4 (R/ )  ITM Peripheral Identification Re
@@ -1014,13 +1018,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  817:Drivers/CMSIS/Include/core_cm3.h **** 
  818:Drivers/CMSIS/Include/core_cm3.h **** /* ITM Integration Read Register Definitions */
  819:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_IRR_ATREADYM_Pos                0U                                            /*!< ITM 
+ARM GAS  /tmp/ccu0UmXd.s 			page 18
+
+
  820:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_IRR_ATREADYM_Msk               (1UL /*<< ITM_IRR_ATREADYM_Pos*/)              /*!< ITM 
  821:Drivers/CMSIS/Include/core_cm3.h **** 
  822:Drivers/CMSIS/Include/core_cm3.h **** /* ITM Integration Mode Control Register Definitions */
  823:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_IMCR_INTEGRATION_Pos            0U                                            /*!< ITM 
-ARM GAS  /tmp/cchkmm94.s 			page 18
-
-
  824:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_IMCR_INTEGRATION_Msk           (1UL /*<< ITM_IMCR_INTEGRATION_Pos*/)          /*!< ITM 
  825:Drivers/CMSIS/Include/core_cm3.h **** 
  826:Drivers/CMSIS/Include/core_cm3.h **** /* ITM Lock Status Register Definitions */
@@ -1074,13 +1078,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  874:Drivers/CMSIS/Include/core_cm3.h **** } DWT_Type;
  875:Drivers/CMSIS/Include/core_cm3.h **** 
  876:Drivers/CMSIS/Include/core_cm3.h **** /* DWT Control Register Definitions */
+ARM GAS  /tmp/ccu0UmXd.s 			page 19
+
+
  877:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_NUMCOMP_Pos               28U                                         /*!< DWT CTR
  878:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_NUMCOMP_Msk               (0xFUL << DWT_CTRL_NUMCOMP_Pos)             /*!< DWT CTR
  879:Drivers/CMSIS/Include/core_cm3.h **** 
  880:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_NOTRCPKT_Pos              27U                                         /*!< DWT CTR
-ARM GAS  /tmp/cchkmm94.s 			page 19
-
-
  881:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_NOTRCPKT_Msk              (0x1UL << DWT_CTRL_NOTRCPKT_Pos)            /*!< DWT CTR
  882:Drivers/CMSIS/Include/core_cm3.h **** 
  883:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_NOEXTTRIG_Pos             26U                                         /*!< DWT CTR
@@ -1134,13 +1138,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  931:Drivers/CMSIS/Include/core_cm3.h **** /* DWT CPI Count Register Definitions */
  932:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CPICNT_CPICNT_Pos               0U                                         /*!< DWT CPI
  933:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CPICNT_CPICNT_Msk              (0xFFUL /*<< DWT_CPICNT_CPICNT_Pos*/)       /*!< DWT CPI
+ARM GAS  /tmp/ccu0UmXd.s 			page 20
+
+
  934:Drivers/CMSIS/Include/core_cm3.h **** 
  935:Drivers/CMSIS/Include/core_cm3.h **** /* DWT Exception Overhead Count Register Definitions */
  936:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_EXCCNT_EXCCNT_Pos               0U                                         /*!< DWT EXC
  937:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_EXCCNT_EXCCNT_Msk              (0xFFUL /*<< DWT_EXCCNT_EXCCNT_Pos*/)       /*!< DWT EXC
-ARM GAS  /tmp/cchkmm94.s 			page 20
-
-
  938:Drivers/CMSIS/Include/core_cm3.h **** 
  939:Drivers/CMSIS/Include/core_cm3.h **** /* DWT Sleep Count Register Definitions */
  940:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_SLEEPCNT_SLEEPCNT_Pos           0U                                         /*!< DWT SLE
@@ -1194,13 +1198,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
  988:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup CMSIS_TPI     Trace Port Interface (TPI)
  989:Drivers/CMSIS/Include/core_cm3.h ****   \brief    Type definitions for the Trace Port Interface (TPI)
  990:Drivers/CMSIS/Include/core_cm3.h ****   @{
+ARM GAS  /tmp/ccu0UmXd.s 			page 21
+
+
  991:Drivers/CMSIS/Include/core_cm3.h ****  */
  992:Drivers/CMSIS/Include/core_cm3.h **** 
  993:Drivers/CMSIS/Include/core_cm3.h **** /**
  994:Drivers/CMSIS/Include/core_cm3.h ****   \brief  Structure type to access the Trace Port Interface Register (TPI).
-ARM GAS  /tmp/cchkmm94.s 			page 21
-
-
  995:Drivers/CMSIS/Include/core_cm3.h ****  */
  996:Drivers/CMSIS/Include/core_cm3.h **** typedef struct
  997:Drivers/CMSIS/Include/core_cm3.h **** {
@@ -1254,13 +1258,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1045:Drivers/CMSIS/Include/core_cm3.h **** /* TPI Formatter and Flush Control Register Definitions */
 1046:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FFCR_TrigIn_Pos                 8U                                         /*!< TPI FFC
 1047:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FFCR_TrigIn_Msk                (0x1UL << TPI_FFCR_TrigIn_Pos)              /*!< TPI FFC
+ARM GAS  /tmp/ccu0UmXd.s 			page 22
+
+
 1048:Drivers/CMSIS/Include/core_cm3.h **** 
 1049:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FFCR_EnFCont_Pos                1U                                         /*!< TPI FFC
 1050:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FFCR_EnFCont_Msk               (0x1UL << TPI_FFCR_EnFCont_Pos)             /*!< TPI FFC
 1051:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 22
-
-
 1052:Drivers/CMSIS/Include/core_cm3.h **** /* TPI TRIGGER Register Definitions */
 1053:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_TRIGGER_TRIGGER_Pos             0U                                         /*!< TPI TRI
 1054:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_TRIGGER_TRIGGER_Msk            (0x1UL /*<< TPI_TRIGGER_TRIGGER_Pos*/)      /*!< TPI TRI
@@ -1314,13 +1318,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1102:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO1_ITM1_Msk                 (0xFFUL << TPI_FIFO1_ITM1_Pos)              /*!< TPI FIF
 1103:Drivers/CMSIS/Include/core_cm3.h **** 
 1104:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO1_ITM0_Pos                  0U                                         /*!< TPI FIF
+ARM GAS  /tmp/ccu0UmXd.s 			page 23
+
+
 1105:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO1_ITM0_Msk                 (0xFFUL /*<< TPI_FIFO1_ITM0_Pos*/)          /*!< TPI FIF
 1106:Drivers/CMSIS/Include/core_cm3.h **** 
 1107:Drivers/CMSIS/Include/core_cm3.h **** /* TPI ITATBCTR0 Register Definitions */
 1108:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_ITATBCTR0_ATREADY2_Pos          0U                                         /*!< TPI ITA
-ARM GAS  /tmp/cchkmm94.s 			page 23
-
-
 1109:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_ITATBCTR0_ATREADY2_Msk         (0x1UL /*<< TPI_ITATBCTR0_ATREADY2_Pos*/)   /*!< TPI ITA
 1110:Drivers/CMSIS/Include/core_cm3.h **** 
 1111:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_ITATBCTR0_ATREADY1_Pos          0U                                         /*!< TPI ITA
@@ -1374,13 +1378,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1159:Drivers/CMSIS/Include/core_cm3.h **** {
 1160:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t TYPE;                   /*!< Offset: 0x000 (R/ )  MPU Type Register */
 1161:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t CTRL;                   /*!< Offset: 0x004 (R/W)  MPU Control Register */
+ARM GAS  /tmp/ccu0UmXd.s 			page 24
+
+
 1162:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RNR;                    /*!< Offset: 0x008 (R/W)  MPU Region RNRber Register */
 1163:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RBAR;                   /*!< Offset: 0x00C (R/W)  MPU Region Base Address Register
 1164:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RASR;                   /*!< Offset: 0x010 (R/W)  MPU Region Attribute and Size Re
 1165:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RBAR_A1;                /*!< Offset: 0x014 (R/W)  MPU Alias 1 Region Base Address 
-ARM GAS  /tmp/cchkmm94.s 			page 24
-
-
 1166:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RASR_A1;                /*!< Offset: 0x018 (R/W)  MPU Alias 1 Region Attribute and
 1167:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RBAR_A2;                /*!< Offset: 0x01C (R/W)  MPU Alias 2 Region Base Address 
 1168:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t RASR_A2;                /*!< Offset: 0x020 (R/W)  MPU Alias 2 Region Attribute and
@@ -1434,13 +1438,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1216:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_AP_Pos                    24U                                            /*!< MPU 
 1217:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_AP_Msk                    (0x7UL << MPU_RASR_AP_Pos)                     /*!< MPU 
 1218:Drivers/CMSIS/Include/core_cm3.h **** 
+ARM GAS  /tmp/ccu0UmXd.s 			page 25
+
+
 1219:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_TEX_Pos                   19U                                            /*!< MPU 
 1220:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_TEX_Msk                   (0x7UL << MPU_RASR_TEX_Pos)                    /*!< MPU 
 1221:Drivers/CMSIS/Include/core_cm3.h **** 
 1222:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_S_Pos                     18U                                            /*!< MPU 
-ARM GAS  /tmp/cchkmm94.s 			page 25
-
-
 1223:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_S_Msk                     (1UL << MPU_RASR_S_Pos)                        /*!< MPU 
 1224:Drivers/CMSIS/Include/core_cm3.h **** 
 1225:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_RASR_C_Pos                     17U                                            /*!< MPU 
@@ -1494,13 +1498,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1273:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_LOCKUP_Msk       (1UL << CoreDebug_DHCSR_S_LOCKUP_Pos)          /*!< Core
 1274:Drivers/CMSIS/Include/core_cm3.h **** 
 1275:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_SLEEP_Pos        18U                                            /*!< Core
+ARM GAS  /tmp/ccu0UmXd.s 			page 26
+
+
 1276:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_SLEEP_Msk        (1UL << CoreDebug_DHCSR_S_SLEEP_Pos)           /*!< Core
 1277:Drivers/CMSIS/Include/core_cm3.h **** 
 1278:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_HALT_Pos         17U                                            /*!< Core
 1279:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_HALT_Msk         (1UL << CoreDebug_DHCSR_S_HALT_Pos)            /*!< Core
-ARM GAS  /tmp/cchkmm94.s 			page 26
-
-
 1280:Drivers/CMSIS/Include/core_cm3.h **** 
 1281:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_REGRDY_Pos       16U                                            /*!< Core
 1282:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DHCSR_S_REGRDY_Msk       (1UL << CoreDebug_DHCSR_S_REGRDY_Pos)          /*!< Core
@@ -1554,13 +1558,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1330:Drivers/CMSIS/Include/core_cm3.h **** 
 1331:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_STATERR_Pos      7U                                            /*!< Core
 1332:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_STATERR_Msk     (1UL << CoreDebug_DEMCR_VC_STATERR_Pos)        /*!< Core
+ARM GAS  /tmp/ccu0UmXd.s 			page 27
+
+
 1333:Drivers/CMSIS/Include/core_cm3.h **** 
 1334:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_CHKERR_Pos       6U                                            /*!< Core
 1335:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_CHKERR_Msk      (1UL << CoreDebug_DEMCR_VC_CHKERR_Pos)         /*!< Core
 1336:Drivers/CMSIS/Include/core_cm3.h **** 
-ARM GAS  /tmp/cchkmm94.s 			page 27
-
-
 1337:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_NOCPERR_Pos      5U                                            /*!< Core
 1338:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_VC_NOCPERR_Msk     (1UL << CoreDebug_DEMCR_VC_NOCPERR_Pos)        /*!< Core
 1339:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1614,13 +1618,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1387:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_BASE      (0xE000EDF0UL)                            /*!< Core Debug Base Address 
 1388:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_BASE        (SCS_BASE +  0x0010UL)                    /*!< SysTick Base Address */
 1389:Drivers/CMSIS/Include/core_cm3.h **** #define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address */
+ARM GAS  /tmp/ccu0UmXd.s 			page 28
+
+
 1390:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Bas
 1391:Drivers/CMSIS/Include/core_cm3.h **** 
 1392:Drivers/CMSIS/Include/core_cm3.h **** #define SCnSCB              ((SCnSCB_Type    *)     SCS_BASE      )   /*!< System control Register 
 1393:Drivers/CMSIS/Include/core_cm3.h **** #define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct
-ARM GAS  /tmp/cchkmm94.s 			page 28
-
-
 1394:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick configuration st
 1395:Drivers/CMSIS/Include/core_cm3.h **** #define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struc
 1396:Drivers/CMSIS/Include/core_cm3.h **** #define ITM                 ((ITM_Type       *)     ITM_BASE      )   /*!< ITM configuration struct
@@ -1674,13 +1678,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1444:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_SetPendingIRQ          __NVIC_SetPendingIRQ
 1445:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_ClearPendingIRQ        __NVIC_ClearPendingIRQ
 1446:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_GetActive              __NVIC_GetActive
+ARM GAS  /tmp/ccu0UmXd.s 			page 29
+
+
 1447:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_SetPriority            __NVIC_SetPriority
 1448:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_GetPriority            __NVIC_GetPriority
 1449:Drivers/CMSIS/Include/core_cm3.h ****   #define NVIC_SystemReset            __NVIC_SystemReset
 1450:Drivers/CMSIS/Include/core_cm3.h **** #endif /* CMSIS_NVIC_VIRTUAL */
-ARM GAS  /tmp/cchkmm94.s 			page 29
-
-
 1451:Drivers/CMSIS/Include/core_cm3.h **** 
 1452:Drivers/CMSIS/Include/core_cm3.h **** #ifdef CMSIS_VECTAB_VIRTUAL
 1453:Drivers/CMSIS/Include/core_cm3.h ****   #ifndef CMSIS_VECTAB_VIRTUAL_HEADER_FILE
@@ -1734,13 +1738,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1501:Drivers/CMSIS/Include/core_cm3.h ****   return ((uint32_t)((SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) >> SCB_AIRCR_PRIGROUP_Pos));
 1502:Drivers/CMSIS/Include/core_cm3.h **** }
 1503:Drivers/CMSIS/Include/core_cm3.h **** 
+ARM GAS  /tmp/ccu0UmXd.s 			page 30
+
+
 1504:Drivers/CMSIS/Include/core_cm3.h **** 
 1505:Drivers/CMSIS/Include/core_cm3.h **** /**
 1506:Drivers/CMSIS/Include/core_cm3.h ****   \brief   Enable Interrupt
 1507:Drivers/CMSIS/Include/core_cm3.h ****   \details Enables a device specific interrupt in the NVIC interrupt controller.
-ARM GAS  /tmp/cchkmm94.s 			page 30
-
-
 1508:Drivers/CMSIS/Include/core_cm3.h ****   \param [in]      IRQn  Device specific interrupt number.
 1509:Drivers/CMSIS/Include/core_cm3.h ****   \note    IRQn must not be negative.
 1510:Drivers/CMSIS/Include/core_cm3.h ****  */
@@ -1794,13 +1798,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1558:Drivers/CMSIS/Include/core_cm3.h **** /**
 1559:Drivers/CMSIS/Include/core_cm3.h ****   \brief   Get Pending Interrupt
 1560:Drivers/CMSIS/Include/core_cm3.h ****   \details Reads the NVIC pending register and returns the pending bit for the specified device spe
+ARM GAS  /tmp/ccu0UmXd.s 			page 31
+
+
 1561:Drivers/CMSIS/Include/core_cm3.h ****   \param [in]      IRQn  Device specific interrupt number.
 1562:Drivers/CMSIS/Include/core_cm3.h ****   \return             0  Interrupt status is not pending.
 1563:Drivers/CMSIS/Include/core_cm3.h ****   \return             1  Interrupt status is pending.
 1564:Drivers/CMSIS/Include/core_cm3.h ****   \note    IRQn must not be negative.
-ARM GAS  /tmp/cchkmm94.s 			page 31
-
-
 1565:Drivers/CMSIS/Include/core_cm3.h ****  */
 1566:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
 1567:Drivers/CMSIS/Include/core_cm3.h **** {
@@ -1854,13 +1858,13 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1615:Drivers/CMSIS/Include/core_cm3.h ****   \note    IRQn must not be negative.
 1616:Drivers/CMSIS/Include/core_cm3.h ****  */
 1617:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE uint32_t __NVIC_GetActive(IRQn_Type IRQn)
+ARM GAS  /tmp/ccu0UmXd.s 			page 32
+
+
 1618:Drivers/CMSIS/Include/core_cm3.h **** {
 1619:Drivers/CMSIS/Include/core_cm3.h ****   if ((int32_t)(IRQn) >= 0)
 1620:Drivers/CMSIS/Include/core_cm3.h ****   {
 1621:Drivers/CMSIS/Include/core_cm3.h ****     return((uint32_t)(((NVIC->IABR[(((uint32_t)IRQn) >> 5UL)] & (1UL << (((uint32_t)IRQn) & 0x1FUL)
-ARM GAS  /tmp/cchkmm94.s 			page 32
-
-
 1622:Drivers/CMSIS/Include/core_cm3.h ****   }
 1623:Drivers/CMSIS/Include/core_cm3.h ****   else
 1624:Drivers/CMSIS/Include/core_cm3.h ****   {
@@ -1879,72 +1883,195 @@ ARM GAS  /tmp/cchkmm94.s 			page 1
 1637:Drivers/CMSIS/Include/core_cm3.h ****   \note    The priority cannot be set for every processor exception.
 1638:Drivers/CMSIS/Include/core_cm3.h ****  */
 1639:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
- 121              		.loc 2 1639 22 view .LVU26
- 122              	.LBB7:
+ 114              		.loc 2 1639 22 view .LVU32
+ 115              	.LBB7:
 1640:Drivers/CMSIS/Include/core_cm3.h **** {
 1641:Drivers/CMSIS/Include/core_cm3.h ****   if ((int32_t)(IRQn) >= 0)
- 123              		.loc 2 1641 3 view .LVU27
+ 116              		.loc 2 1641 3 view .LVU33
 1642:Drivers/CMSIS/Include/core_cm3.h ****   {
 1643:Drivers/CMSIS/Include/core_cm3.h ****     NVIC->IP[((uint32_t)IRQn)]               = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (u
- 124              		.loc 2 1643 5 view .LVU28
- 125              		.loc 2 1643 46 is_stmt 0 view .LVU29
- 126 0048 054B     		ldr	r3, .L5+8
- 127 004a 2022     		movs	r2, #32
- 128 004c 83F80623 		strb	r2, [r3, #774]
- 129              	.LVL1:
- 130              		.loc 2 1643 46 view .LVU30
- 131              	.LBE7:
- 132              	.LBE6:
-  30:Core/Src/gpio.c ****     NVIC_EnableIRQ(EXTI0_IRQn);
- 133              		.loc 1 30 5 is_stmt 1 view .LVU31
- 134              	.LBB8:
- 135              	.LBI8:
+ 117              		.loc 2 1643 5 view .LVU34
+ 118              		.loc 2 1643 46 is_stmt 0 view .LVU35
+ 119 0080 044B     		ldr	r3, .L2+4
+ 120 0082 1022     		movs	r2, #16
+ 121 0084 83F82623 		strb	r2, [r3, #806]
+ 122              	.LVL1:
+ 123              		.loc 2 1643 46 view .LVU36
+ 124              	.LBE7:
+ 125              	.LBE6:
+  39:Core/Src/usart.c ****     NVIC_EnableIRQ(USART2_IRQn);
+ 126              		.loc 1 39 5 is_stmt 1 view .LVU37
+ 127              	.LBB8:
+ 128              	.LBI8:
 1511:Drivers/CMSIS/Include/core_cm3.h **** {
- 136              		.loc 2 1511 22 view .LVU32
- 137              	.LBB9:
+ 129              		.loc 2 1511 22 view .LVU38
+ 130              	.LBB9:
 1513:Drivers/CMSIS/Include/core_cm3.h ****   {
- 138              		.loc 2 1513 3 view .LVU33
+ 131              		.loc 2 1513 3 view .LVU39
 1515:Drivers/CMSIS/Include/core_cm3.h ****   }
- 139              		.loc 2 1515 5 view .LVU34
+ 132              		.loc 2 1515 5 view .LVU40
 1515:Drivers/CMSIS/Include/core_cm3.h ****   }
- 140              		.loc 2 1515 43 is_stmt 0 view .LVU35
- 141 0050 4022     		movs	r2, #64
- 142 0052 1A60     		str	r2, [r3]
- 143              	.LVL2:
+ 133              		.loc 2 1515 43 is_stmt 0 view .LVU41
+ 134 0088 4022     		movs	r2, #64
+ 135 008a 5A60     		str	r2, [r3, #4]
+ 136              	.LVL2:
 1515:Drivers/CMSIS/Include/core_cm3.h ****   }
- 144              		.loc 2 1515 43 view .LVU36
- 145              	.LBE9:
- 146              	.LBE8:
-  31:Core/Src/gpio.c **** 
-  32:Core/Src/gpio.c **** }...
- 147              		.loc 1 32 1 view .LVU37
-ARM GAS  /tmp/cchkmm94.s 			page 33
+ 137              		.loc 2 1515 43 view .LVU42
+ 138              	.LBE9:
+ARM GAS  /tmp/ccu0UmXd.s 			page 33
 
 
- 148 0054 7047     		bx	lr
- 149              	.L6:
- 150 0056 00BF     		.align	2
- 151              	.L5:
- 152 0058 00380240 		.word	1073887232
- 153 005c 00000240 		.word	1073872896
- 154 0060 00E100E0 		.word	-536813312
- 155              		.cfi_endproc
- 156              	.LFE73:
- 158              		.text
- 159              	.Letext0:
- 160              		.file 3 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
- 161              		.file 4 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
- 162              		.file 5 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
-ARM GAS  /tmp/cchkmm94.s 			page 34
+ 139              	.LBE8:
+  40:Core/Src/usart.c **** 
+  41:Core/Src/usart.c **** 
+  42:Core/Src/usart.c **** }
+ 140              		.loc 1 42 1 view .LVU43
+ 141 008c 7047     		bx	lr
+ 142              	.L3:
+ 143 008e 00BF     		.align	2
+ 144              	.L2:
+ 145 0090 00380240 		.word	1073887232
+ 146 0094 00E100E0 		.word	-536813312
+ 147              		.cfi_endproc
+ 148              	.LFE72:
+ 150              		.section	.rodata.SendString.str1.4,"aMS",%progbits,1
+ 151              		.align	2
+ 152              	.LC0:
+ 153 0000 0D0A00   		.ascii	"\015\012\000"
+ 154              		.section	.text.SendString,"ax",%progbits
+ 155              		.align	1
+ 156              		.global	SendString
+ 157              		.syntax unified
+ 158              		.thumb
+ 159              		.thumb_func
+ 161              	SendString:
+ 162              	.LVL3:
+ 163              	.LFB73:
+  43:Core/Src/usart.c **** 
+  44:Core/Src/usart.c **** void SendString(char *str)
+  45:Core/Src/usart.c **** {
+ 164              		.loc 1 45 1 is_stmt 1 view -0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168              		.loc 1 45 1 is_stmt 0 view .LVU45
+ 169 0000 38B5     		push	{r3, r4, r5, lr}
+ 170              	.LCFI0:
+ 171              		.cfi_def_cfa_offset 16
+ 172              		.cfi_offset 3, -16
+ 173              		.cfi_offset 4, -12
+ 174              		.cfi_offset 5, -8
+ 175              		.cfi_offset 14, -4
+ 176 0002 0546     		mov	r5, r0
+  46:Core/Src/usart.c ****     strcat(str, "\r\n");
+ 177              		.loc 1 46 5 is_stmt 1 view .LVU46
+ 178 0004 FFF7FEFF 		bl	strlen
+ 179              	.LVL4:
+ 180              		.loc 1 46 5 is_stmt 0 view .LVU47
+ 181 0008 2A18     		adds	r2, r5, r0
+ 182 000a 0E4B     		ldr	r3, .L9
+ 183 000c 1988     		ldrh	r1, [r3]	@ unaligned
+ 184 000e 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 185 0010 2952     		strh	r1, [r5, r0]	@ unaligned
+ 186 0012 9370     		strb	r3, [r2, #2]
+  47:Core/Src/usart.c ****     USART2->SR &= ~USART_SR_TC;
+ 187              		.loc 1 47 5 is_stmt 1 view .LVU48
+ 188              		.loc 1 47 16 is_stmt 0 view .LVU49
+ 189 0014 0C4A     		ldr	r2, .L9+4
+ARM GAS  /tmp/ccu0UmXd.s 			page 34
+
+
+ 190 0016 1368     		ldr	r3, [r2]
+ 191 0018 23F04003 		bic	r3, r3, #64
+ 192 001c 1360     		str	r3, [r2]
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 193              		.loc 1 48 5 is_stmt 1 view .LVU50
+ 194              	.LBB10:
+ 195              		.loc 1 48 9 view .LVU51
+ 196              	.LVL5:
+ 197              		.loc 1 48 17 is_stmt 0 view .LVU52
+ 198 001e 0024     		movs	r4, #0
+ 199              		.loc 1 48 5 view .LVU53
+ 200 0020 09E0     		b	.L5
+ 201              	.LVL6:
+ 202              	.L7:
+  49:Core/Src/usart.c ****     {
+  50:Core/Src/usart.c ****         USART2->DR = str[i];
+ 203              		.loc 1 50 9 is_stmt 1 view .LVU54
+ 204              		.loc 1 50 25 is_stmt 0 view .LVU55
+ 205 0022 2A5D     		ldrb	r2, [r5, r4]	@ zero_extendqisi2
+ 206              		.loc 1 50 20 view .LVU56
+ 207 0024 084B     		ldr	r3, .L9+4
+ 208 0026 5A60     		str	r2, [r3, #4]
+  51:Core/Src/usart.c ****         while((USART2->SR & USART_SR_TC)==0);
+ 209              		.loc 1 51 9 is_stmt 1 view .LVU57
+ 210              	.L6:
+ 211              		.loc 1 51 45 discriminator 1 view .LVU58
+ 212              		.loc 1 51 14 discriminator 1 view .LVU59
+ 213              		.loc 1 51 22 is_stmt 0 discriminator 1 view .LVU60
+ 214 0028 074B     		ldr	r3, .L9+4
+ 215 002a 1B68     		ldr	r3, [r3]
+ 216              		.loc 1 51 14 discriminator 1 view .LVU61
+ 217 002c 13F0400F 		tst	r3, #64
+ 218 0030 FAD0     		beq	.L6
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 219              		.loc 1 48 41 is_stmt 1 discriminator 2 view .LVU62
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 220              		.loc 1 48 42 is_stmt 0 discriminator 2 view .LVU63
+ 221 0032 0134     		adds	r4, r4, #1
+ 222              	.LVL7:
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 223              		.loc 1 48 42 discriminator 2 view .LVU64
+ 224 0034 E4B2     		uxtb	r4, r4
+ 225              	.LVL8:
+ 226              	.L5:
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 227              		.loc 1 48 24 is_stmt 1 discriminator 1 view .LVU65
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 228              		.loc 1 48 28 is_stmt 0 discriminator 1 view .LVU66
+ 229 0036 2846     		mov	r0, r5
+ 230 0038 FFF7FEFF 		bl	strlen
+ 231              	.LVL9:
+  48:Core/Src/usart.c ****     for(uint8_t i = 0; i < strlen(str); i++)
+ 232              		.loc 1 48 5 discriminator 1 view .LVU67
+ 233 003c 8442     		cmp	r4, r0
+ 234 003e F0D3     		bcc	.L7
+ 235              	.LBE10:
+  52:Core/Src/usart.c ****     }
+ARM GAS  /tmp/ccu0UmXd.s 			page 35
+
+
+  53:Core/Src/usart.c **** }...
+ 236              		.loc 1 53 1 view .LVU68
+ 237 0040 38BD     		pop	{r3, r4, r5, pc}
+ 238              	.LVL10:
+ 239              	.L10:
+ 240              		.loc 1 53 1 view .LVU69
+ 241 0042 00BF     		.align	2
+ 242              	.L9:
+ 243 0044 00000000 		.word	.LC0
+ 244 0048 00440040 		.word	1073759232
+ 245              		.cfi_endproc
+ 246              	.LFE73:
+ 248              		.text
+ 249              	.Letext0:
+ 250              		.file 3 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+ 251              		.file 4 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+ 252              		.file 5 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+ 253              		.file 6 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
+ 254              		.file 7 "<built-in>"
+ARM GAS  /tmp/ccu0UmXd.s 			page 36
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 gpio.c
-     /tmp/cchkmm94.s:18     .text.led_init:0000000000000000 $t
-     /tmp/cchkmm94.s:24     .text.led_init:0000000000000000 led_init
-     /tmp/cchkmm94.s:54     .text.led_init:0000000000000020 $d
-     /tmp/cchkmm94.s:60     .text.btn_init:0000000000000000 $t
-     /tmp/cchkmm94.s:66     .text.btn_init:0000000000000000 btn_init
-     /tmp/cchkmm94.s:152    .text.btn_init:0000000000000058 $d
+                            *ABS*:0000000000000000 usart.c
+     /tmp/ccu0UmXd.s:18     .text.usart_init:0000000000000000 $t
+     /tmp/ccu0UmXd.s:24     .text.usart_init:0000000000000000 usart_init
+     /tmp/ccu0UmXd.s:145    .text.usart_init:0000000000000090 $d
+     /tmp/ccu0UmXd.s:151    .rodata.SendString.str1.4:0000000000000000 $d
+     /tmp/ccu0UmXd.s:155    .text.SendString:0000000000000000 $t
+     /tmp/ccu0UmXd.s:161    .text.SendString:0000000000000000 SendString
+     /tmp/ccu0UmXd.s:243    .text.SendString:0000000000000044 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+strlen

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccnUhpnC.s 			page 1
+ARM GAS  /tmp/cc1kVr5j.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -31,36 +31,42 @@ ARM GAS  /tmp/ccnUhpnC.s 			page 1
    3:Core/Src/it.c **** #include "it.h"
    4:Core/Src/it.c **** #include "gpio.h"
    5:Core/Src/it.c **** #include "main.h"
-   6:Core/Src/it.c **** 
-   7:Core/Src/it.c **** void TIM2_IRQHandler(void)
-   8:Core/Src/it.c **** {
-  27              		.loc 1 8 1 view -0
+   6:Core/Src/it.c **** #include <string.h>
+   7:Core/Src/it.c **** #include <stdbool.h>
+   8:Core/Src/it.c **** 
+   9:Core/Src/it.c **** extern bool CommandRecieved;
+  10:Core/Src/it.c **** extern char RxBuffer[256];
+  11:Core/Src/it.c **** 
+  12:Core/Src/it.c **** 
+  13:Core/Src/it.c **** void TIM2_IRQHandler(void)
+  14:Core/Src/it.c **** {
+  27              		.loc 1 14 1 view -0
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              		@ link register save eliminated.
-   9:Core/Src/it.c ****     TIM2->SR &= ~TIM_SR_UIF;        //Clearing update interrupt flag
-  32              		.loc 1 9 5 view .LVU1
-  33              		.loc 1 9 14 is_stmt 0 view .LVU2
+  15:Core/Src/it.c ****     TIM2->SR &= ~TIM_SR_UIF;        //Clearing update interrupt flag
+  32              		.loc 1 15 5 view .LVU1
+  33              		.loc 1 15 14 is_stmt 0 view .LVU2
   34 0000 4FF08042 		mov	r2, #1073741824
   35 0004 1369     		ldr	r3, [r2, #16]
   36 0006 23F00103 		bic	r3, r3, #1
   37 000a 1361     		str	r3, [r2, #16]
-  10:Core/Src/it.c ****     LED_SWAP();
-  38              		.loc 1 10 5 is_stmt 1 view .LVU3
+  16:Core/Src/it.c ****     LED_SWAP();
+  38              		.loc 1 16 5 is_stmt 1 view .LVU3
   39 000c 02F50132 		add	r2, r2, #132096
   40 0010 5369     		ldr	r3, [r2, #20]
   41 0012 83F08003 		eor	r3, r3, #128
   42 0016 5361     		str	r3, [r2, #20]
-  43              		.loc 1 10 15 view .LVU4
-  11:Core/Src/it.c **** }
-  44              		.loc 1 11 1 is_stmt 0 view .LVU5
+ARM GAS  /tmp/cc1kVr5j.s 			page 2
+
+
+  43              		.loc 1 16 15 view .LVU4
+  17:Core/Src/it.c **** }
+  44              		.loc 1 17 1 is_stmt 0 view .LVU5
   45 0018 7047     		bx	lr
   46              		.cfi_endproc
   47              	.LFE72:
-ARM GAS  /tmp/ccnUhpnC.s 			page 2
-
-
   49              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
   50              		.align	1
   51              		.global	EXTI0_IRQHandler
@@ -69,10 +75,10 @@ ARM GAS  /tmp/ccnUhpnC.s 			page 1
   54              		.thumb_func
   56              	EXTI0_IRQHandler:
   57              	.LFB73:
-  12:Core/Src/it.c **** 
-  13:Core/Src/it.c **** void EXTI0_IRQHandler(void)
-  14:Core/Src/it.c **** {
-  58              		.loc 1 14 1 is_stmt 1 view -0
+  18:Core/Src/it.c **** 
+  19:Core/Src/it.c **** void EXTI0_IRQHandler(void)
+  20:Core/Src/it.c **** {
+  58              		.loc 1 20 1 is_stmt 1 view -0
   59              		.cfi_startproc
   60              		@ args = 0, pretend = 0, frame = 0
   61              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -81,28 +87,27 @@ ARM GAS  /tmp/ccnUhpnC.s 			page 1
   64              		.cfi_def_cfa_offset 8
   65              		.cfi_offset 3, -8
   66              		.cfi_offset 14, -4
-  15:Core/Src/it.c ****     delay(1000);                    //Debouncing
-  67              		.loc 1 15 5 view .LVU7
+  21:Core/Src/it.c ****     delay(1000);                    //Debouncing
+  67              		.loc 1 21 5 view .LVU7
   68 0002 4FF47A70 		mov	r0, #1000
   69 0006 FFF7FEFF 		bl	delay
   70              	.LVL0:
-  16:Core/Src/it.c ****     EXTI->PR |= EXTI_PR_PR0;        //Clearing trigger request
-  71              		.loc 1 16 5 view .LVU8
-  72              		.loc 1 16 14 is_stmt 0 view .LVU9
+  22:Core/Src/it.c ****     EXTI->PR |= EXTI_PR_PR0;        //Clearing trigger request
+  71              		.loc 1 22 5 view .LVU8
+  72              		.loc 1 22 14 is_stmt 0 view .LVU9
   73 000a 064A     		ldr	r2, .L4
   74 000c 5369     		ldr	r3, [r2, #20]
   75 000e 43F00103 		orr	r3, r3, #1
   76 0012 5361     		str	r3, [r2, #20]
-  17:Core/Src/it.c ****     
-  18:Core/Src/it.c ****     TIM2->CR1 ^= TIM_CR1_CEN;       //Toggle TIM2
-  77              		.loc 1 18 5 is_stmt 1 view .LVU10
-  78              		.loc 1 18 15 is_stmt 0 view .LVU11
+  23:Core/Src/it.c ****     TIM2->CR1 ^= TIM_CR1_CEN;       //Toggle TIM2
+  77              		.loc 1 23 5 is_stmt 1 view .LVU10
+  78              		.loc 1 23 15 is_stmt 0 view .LVU11
   79 0014 4FF08042 		mov	r2, #1073741824
   80 0018 1368     		ldr	r3, [r2]
   81 001a 83F00103 		eor	r3, r3, #1
   82 001e 1360     		str	r3, [r2]
-  19:Core/Src/it.c **** }...
-  83              		.loc 1 19 1 view .LVU12
+  24:Core/Src/it.c **** }
+  83              		.loc 1 24 1 view .LVU12
   84 0020 08BD     		pop	{r3, pc}
   85              	.L5:
   86 0022 00BF     		.align	2
@@ -110,22 +115,142 @@ ARM GAS  /tmp/ccnUhpnC.s 			page 1
   88 0024 00040140 		.word	1073808384
   89              		.cfi_endproc
   90              	.LFE73:
-  92              		.text
-  93              	.Letext0:
-  94              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
-  95              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
-  96              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
-  97              		.file 5 "Core/Inc/main.h"
-ARM GAS  /tmp/ccnUhpnC.s 			page 3
+  92              		.section	.text.USART2_IRQHandler,"ax",%progbits
+  93              		.align	1
+  94              		.global	USART2_IRQHandler
+ARM GAS  /tmp/cc1kVr5j.s 			page 3
+
+
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  99              	USART2_IRQHandler:
+ 100              	.LFB74:
+  25:Core/Src/it.c **** 
+  26:Core/Src/it.c **** void USART2_IRQHandler(void)
+  27:Core/Src/it.c **** {
+ 101              		.loc 1 27 1 is_stmt 1 view -0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+  28:Core/Src/it.c ****     
+  29:Core/Src/it.c ****     if((USART2->SR & USART_SR_RXNE) != 0)
+ 105              		.loc 1 29 5 view .LVU14
+ 106              		.loc 1 29 15 is_stmt 0 view .LVU15
+ 107 0000 0C4B     		ldr	r3, .L13
+ 108 0002 1B68     		ldr	r3, [r3]
+ 109              		.loc 1 29 7 view .LVU16
+ 110 0004 13F0200F 		tst	r3, #32
+ 111 0008 13D0     		beq	.L9
+  27:Core/Src/it.c ****     
+ 112              		.loc 1 27 1 view .LVU17
+ 113 000a 10B5     		push	{r4, lr}
+ 114              	.LCFI1:
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 4, -8
+ 117              		.cfi_offset 14, -4
+ 118              	.LBB2:
+  30:Core/Src/it.c ****     {
+  31:Core/Src/it.c ****         uint8_t pos = strlen(RxBuffer);
+ 119              		.loc 1 31 9 is_stmt 1 view .LVU18
+ 120              		.loc 1 31 23 is_stmt 0 view .LVU19
+ 121 000c 0A4C     		ldr	r4, .L13+4
+ 122 000e 2046     		mov	r0, r4
+ 123 0010 FFF7FEFF 		bl	strlen
+ 124              	.LVL1:
+  32:Core/Src/it.c ****         RxBuffer[strlen(RxBuffer)] = USART2->DR;
+ 125              		.loc 1 32 9 is_stmt 1 view .LVU20
+ 126              		.loc 1 32 44 is_stmt 0 view .LVU21
+ 127 0014 074B     		ldr	r3, .L13
+ 128 0016 5B68     		ldr	r3, [r3, #4]
+ 129              		.loc 1 32 36 view .LVU22
+ 130 0018 2354     		strb	r3, [r4, r0]
+  33:Core/Src/it.c ****         if (RxBuffer[pos]==0x0A && (RxBuffer[pos-1] == 0x0D) )
+ 131              		.loc 1 33 9 is_stmt 1 view .LVU23
+ 132              		.loc 1 33 21 is_stmt 0 view .LVU24
+ 133 001a DBB2     		uxtb	r3, r3
+ 134              		.loc 1 33 12 view .LVU25
+ 135 001c 0A2B     		cmp	r3, #10
+ 136 001e 00D0     		beq	.L12
+ 137              	.LVL2:
+ 138              	.L6:
+ 139              		.loc 1 33 12 view .LVU26
+ 140              	.LBE2:
+  34:Core/Src/it.c ****         {
+  35:Core/Src/it.c ****             CommandRecieved = true;
+ARM GAS  /tmp/cc1kVr5j.s 			page 4
+
+
+  36:Core/Src/it.c ****             return;
+  37:Core/Src/it.c ****         }
+  38:Core/Src/it.c ****     }
+  39:Core/Src/it.c **** }...
+ 141              		.loc 1 39 1 view .LVU27
+ 142 0020 10BD     		pop	{r4, pc}
+ 143              	.LVL3:
+ 144              	.L12:
+ 145              	.LBB3:
+  33:Core/Src/it.c ****         if (RxBuffer[pos]==0x0A && (RxBuffer[pos-1] == 0x0D) )
+ 146              		.loc 1 33 49 discriminator 1 view .LVU28
+ 147 0022 0138     		subs	r0, r0, #1
+ 148              	.LVL4:
+  33:Core/Src/it.c ****         if (RxBuffer[pos]==0x0A && (RxBuffer[pos-1] == 0x0D) )
+ 149              		.loc 1 33 45 discriminator 1 view .LVU29
+ 150 0024 235C     		ldrb	r3, [r4, r0]	@ zero_extendqisi2
+  33:Core/Src/it.c ****         if (RxBuffer[pos]==0x0A && (RxBuffer[pos-1] == 0x0D) )
+ 151              		.loc 1 33 33 discriminator 1 view .LVU30
+ 152 0026 0D2B     		cmp	r3, #13
+ 153 0028 FAD1     		bne	.L6
+  35:Core/Src/it.c ****             CommandRecieved = true;
+ 154              		.loc 1 35 13 is_stmt 1 view .LVU31
+  35:Core/Src/it.c ****             CommandRecieved = true;
+ 155              		.loc 1 35 29 is_stmt 0 view .LVU32
+ 156 002a 044B     		ldr	r3, .L13+8
+ 157 002c 0122     		movs	r2, #1
+ 158 002e 1A70     		strb	r2, [r3]
+  36:Core/Src/it.c ****             return;
+ 159              		.loc 1 36 13 is_stmt 1 view .LVU33
+ 160 0030 F6E7     		b	.L6
+ 161              	.L9:
+ 162              	.LCFI2:
+ 163              		.cfi_def_cfa_offset 0
+ 164              		.cfi_restore 4
+ 165              		.cfi_restore 14
+  36:Core/Src/it.c ****             return;
+ 166              		.loc 1 36 13 is_stmt 0 view .LVU34
+ 167 0032 7047     		bx	lr
+ 168              	.L14:
+ 169              		.align	2
+ 170              	.L13:
+ 171 0034 00440040 		.word	1073759232
+ 172 0038 00000000 		.word	RxBuffer
+ 173 003c 00000000 		.word	CommandRecieved
+ 174              	.LBE3:
+ 175              		.cfi_endproc
+ 176              	.LFE74:
+ 178              		.text
+ 179              	.Letext0:
+ 180              		.file 2 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_de
+ 181              		.file 3 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint
+ 182              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l152xc.h"
+ 183              		.file 5 "/home/seradya/toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
+ 184              		.file 6 "Core/Inc/main.h"
+ARM GAS  /tmp/cc1kVr5j.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 it.c
-     /tmp/ccnUhpnC.s:18     .text.TIM2_IRQHandler:0000000000000000 $t
-     /tmp/ccnUhpnC.s:24     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
-     /tmp/ccnUhpnC.s:50     .text.EXTI0_IRQHandler:0000000000000000 $t
-     /tmp/ccnUhpnC.s:56     .text.EXTI0_IRQHandler:0000000000000000 EXTI0_IRQHandler
-     /tmp/ccnUhpnC.s:88     .text.EXTI0_IRQHandler:0000000000000024 $d
+     /tmp/cc1kVr5j.s:18     .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/cc1kVr5j.s:24     .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/cc1kVr5j.s:50     .text.EXTI0_IRQHandler:0000000000000000 $t
+     /tmp/cc1kVr5j.s:56     .text.EXTI0_IRQHandler:0000000000000000 EXTI0_IRQHandler
+     /tmp/cc1kVr5j.s:88     .text.EXTI0_IRQHandler:0000000000000024 $d
+     /tmp/cc1kVr5j.s:93     .text.USART2_IRQHandler:0000000000000000 $t
+     /tmp/cc1kVr5j.s:99     .text.USART2_IRQHandler:0000000000000000 USART2_IRQHandler
+     /tmp/cc1kVr5j.s:171    .text.USART2_IRQHandler:0000000000000034 $d
 
 UNDEFINED SYMBOLS
 delay
+strlen
+RxBuffer
+CommandRecieved
