@@ -16,7 +16,11 @@ int main(void)
   memset(RxBuffer,0,256);
   sysclk_init();        //System clock initializing 
   led_init();           //Initializing GPIO port for led
+  led_init_pwm();       //Initialize GPIO for PWM
+
   tim2_init();          //initializing TIM2
+  tim3_pwm_init();      //Init TIM3 in PWM mode
+
   btn_init();           //User button initializingd
   usart_init();         //USART2 initialization
 

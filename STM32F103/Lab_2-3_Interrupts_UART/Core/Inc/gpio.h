@@ -7,5 +7,6 @@
 
 void led_init(void);
 void btn_init(void);
+void led_init_pwm(void);
 
 #endif /* __GPIO_H */

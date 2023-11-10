@@ -12,6 +12,15 @@ void led_init(void)
 	GPIOA->CRL |= GPIO_CRL_MODE5_1;		//PA5, выход 2МГц
 }
 
+void led_init_pwm(void)
+{
+	//Pin PA7 (TIM3_CN2)
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;						//включить тактирование GPIOA
+	GPIOA->CRL &= ~(GPIO_CRL_CNF7 | GPIO_CRL_MODE7);		//очистка полей
+	GPIOA->CRL |= GPIO_CRL_MODE7_1;							//и конфигурация PA5, выход 2МГц
+	GPIOA->CRL |= GPIO_CRL_CNF7_1;							//Alternate function push-pullS
+}
+
 void btn_init(void)
 {
     //Включить тактирование порта GPIOC и альтернативных функций
