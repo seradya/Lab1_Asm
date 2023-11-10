@@ -2,27 +2,61 @@
     "version": "0.12.0",
     "configurations": [
         {
-            
             "name": "Cortex Debug",
             "cwd": "${workspaceRoot}",
-            "executable": "build/Lab2_3_Interrupts_UART.elf",
+            "executable": "build/${workspaceFolderBasename}.elf",
             "request": "launch",
             "type": "cortex-debug",
-            "serverpath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe", 
-            "servertype": "jlink",
-            "device": "STM32L152RC",
-            "interface": "swd",
-            "serialNumber": "", 
+            "servertype": "openocd",
             "runToEntryPoint": "main",
-            "svdFile": "../Configs/SVD/STM32L15xC.svd",
             "preLaunchTask": "build",
+            "device": "STM32F103C8",
+            "svdFile": "../../Configs/SVD/STM32F103.svd",
             "showDevDebugOutput": "raw",
             "configFiles": [
-                "../OpenOCD/interface/jlink.cfg",
-                "../OpenOCD/target/stm32l1.cfg"
-            ]
+                "../../Configs/OpenOCD/interface/stlink.cfg",
+                "../../Configs/OpenOCD/target/stm32f1x.cfg"
+            ],
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 8000000,
+                "swoFrequency": 2000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
+                ]
+            }
+        },
+        {
+            "name": "C/C++: arm-none-eabi-gcc build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: arm-none-eabi-gcc build active file",
+            "miDebuggerPath": "gdb"
             
         }
-        
     ]
 }

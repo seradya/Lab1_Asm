@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "stm32l1xx.h": "c",
-        "usart.h": "c"
-    },
-    "cortex-debug.variableUseNaturalFormat": false
-}

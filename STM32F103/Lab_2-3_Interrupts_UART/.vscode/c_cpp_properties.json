@@ -16,7 +16,7 @@
 
             "defines": [
 
-                "STM32L152xC"
+                "STM32F103xB"
                 //"USE_HAL_DRIVER"
 
             ],
