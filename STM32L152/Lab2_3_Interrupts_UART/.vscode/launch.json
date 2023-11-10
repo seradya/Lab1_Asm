@@ -1,0 +1,28 @@
+{
+    "version": "0.12.0",
+    "configurations": [
+        {
+            
+            "name": "Cortex Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "build/Lab2_3_Interrupts_UART.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "serverpath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe", 
+            "servertype": "jlink",
+            "device": "STM32L152RC",
+            "interface": "swd",
+            "serialNumber": "", 
+            "runToEntryPoint": "main",
+            "svdFile": "../Configs/SVD/STM32L15xC.svd",
+            "preLaunchTask": "build",
+            "showDevDebugOutput": "raw",
+            "configFiles": [
+                "../OpenOCD/interface/jlink.cfg",
+                "../OpenOCD/target/stm32l1.cfg"
+            ]
+            
+        }
+        
+    ]
+}
