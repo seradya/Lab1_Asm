@@ -5,7 +5,7 @@
 #include "rcc.h"
 #include "usart.h"
 
-bool CommandRecieved;
+bool CommandReceived;
 char RxBuffer[256];
 char TxBuffer[256];
 
@@ -22,7 +22,7 @@ int main(void)
 
   while(true)
   {
-    if(CommandRecieved)
+    if(CommandReceived)
     {
       ExecuteCommand();
     }
@@ -33,7 +33,7 @@ int main(void)
 
 void ExecuteCommand(void)
 {
-  CommandRecieved = false;
+  CommandReceived = false;
 
   if(strncmp(RxBuffer, "*IDN?", 5) == 0)
   {
@@ -42,13 +42,13 @@ void ExecuteCommand(void)
 
   else if(strncmp(RxBuffer, "Start", 5) == 0)
   {
-    //TIM2->CR1 |= TIM_CR1_CEN;
+    TIM2->CR1 |= TIM_CR1_CEN;
     strcpy(TxBuffer,"Ok, start");
   }
 
   else if(strncmp(RxBuffer, "Stop", 4) == 0)
   {
-    //TIM2->CR1 &= ~TIM_CR1_CEN;
+    TIM2->CR1 &= ~TIM_CR1_CEN;
     strcpy(TxBuffer,"Ok, stop");
   }
 
@@ -59,8 +59,8 @@ void ExecuteCommand(void)
     sscanf(RxBuffer, "%*s %hu", &tmp);
     if((tmp >= 100) && (tmp <= 5000))
     {
-      //TIM2->ARR = tmp - 1;
-      //TIM2->CNT = 0;
+      TIM2->ARR = tmp - 1;
+      TIM2->CNT = 0;
       strcpy(TxBuffer,"Ok, period is set");
     }
     else
