@@ -28,6 +28,7 @@ void EXTI15_10_IRQHandler(void)
 		delay(10000);					//Задержка для защиты от дребезга контактов
 		//TIM2->CR1 ^= TIM_CR1_CEN;		//Инвертируем состояние таймера
 		tim3_set_angle(angle^0xB4);
+		
 
 	}
 }

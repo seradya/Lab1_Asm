@@ -25,7 +25,7 @@ void tim3_pwm_init(void)
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;		//Включить тактирование TIM3
 
 	//Частота APB1 для таймеров = APB1Clk * 2 = 32МГц * 2 = 64МГц
-	TIM3->PSC = 64000-1;										//Предделитель частоты (64МГц/64000 = 1кГц)
+	TIM3->PSC = 20-1;										//Предделитель частоты (64МГц/64000 = 1кГц)
 	//TIM3->ARR = 100-1;											//Модуль счёта таймера (1кГц/1000 = 1с)
 	//TIM3->CCR2 = 50-1;											//на каком числе переключение
 	tim3_set_freq(50);
@@ -39,11 +39,11 @@ void tim3_pwm_init(void)
 
 void tim3_set_freq(uint8_t freq_HZ)
 {
-	TIM3->ARR = (uint16_t)(TIM3_CLK)/freq_HZ;
+	TIM3->ARR = (uint16_t)((TIM3_CLK)/freq_HZ);
 }
 
 void tim3_set_angle(uint8_t angle_deg)
 {
-	TIM3->CCR2 = (uint16_t)(1800 + (angle_deg*10));
+	TIM3->CCR2 = (uint16_t)(1350 + (angle_deg*19));
 	angle = angle_deg;
 }
