@@ -31,9 +31,8 @@ void tim3_pwm_init(void)
 	tim3_set_freq(50);
 	tim3_set_angle(0);
 	TIM3->CCER |= TIM_CCER_CC2E;								//разблокируем выход
-	TIM3->CCMR1 |= (TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2);		//режим ШИМ1									
+	TIM3->CCMR1 |= (TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2 | TIM_CCMR1_OC2PE);		//режим ШИМ1 + preload en									
 	TIM3->CR1 |= TIM_CR1_CEN;									//Включить таймер
-	
 
 }
 
