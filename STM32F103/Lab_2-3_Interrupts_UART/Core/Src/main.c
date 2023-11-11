@@ -34,7 +34,7 @@ void ExecuteCommand(void)
 
   if (strncmp(RxBuffer, "*IDN?", 5) == 0)
   {
-    strcpy(TxBuffer, "BMSTU, IU4, Lab3");
+    strcpy(TxBuffer,"Serebrennikov AN\n\rDobrotinAA\n\rIU4-71B\n\r");
   }
 
   else if (strncmp(RxBuffer, "Start", 5) == 0)
