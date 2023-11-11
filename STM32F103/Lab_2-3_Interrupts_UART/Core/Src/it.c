@@ -2,12 +2,14 @@
 #include "stm32f1xx.h"
 #include "it.h"
 #include "gpio.h"
+#include "tim.h"
 #include "main.h"
 #include <string.h>
 #include <stdbool.h>
 
 extern bool CommandReceived;
 extern char RxBuffer[256];
+extern uint8_t angle;
 
 
 void TIM2_IRQHandler(void)
@@ -24,7 +26,9 @@ void EXTI15_10_IRQHandler(void)
 	{
 		EXTI->PR |= EXTI_PR_PR13;
 		delay(10000);					//Задержка для защиты от дребезга контактов
-		TIM2->CR1 ^= TIM_CR1_CEN;		//Инвертируем состояние таймера
+		//TIM2->CR1 ^= TIM_CR1_CEN;		//Инвертируем состояние таймера
+		tim3_set_angle(angle^0xB4);
+
 	}
 }
 

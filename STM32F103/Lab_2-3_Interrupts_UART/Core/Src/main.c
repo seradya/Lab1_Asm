@@ -8,6 +8,7 @@
 bool CommandReceived;
 char RxBuffer[256];
 char TxBuffer[256];
+uint8_t angle;
 
 
 int main(void)
@@ -18,7 +19,7 @@ int main(void)
   led_init();           //Initializing GPIO port for led
   led_init_pwm();       //Initialize GPIO for PWM
 
-  tim2_init();          //initializing TIM2
+  //tim2_init();          //initializing TIM2
   tim3_pwm_init();      //Init TIM3 in PWM mode
 
   btn_init();           //User button initializingd
