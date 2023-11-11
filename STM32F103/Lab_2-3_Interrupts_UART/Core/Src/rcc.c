@@ -16,18 +16,18 @@ void sysclk_init(void)
 	FLASH->ACR &= ~FLASH_ACR_LATENCY;
 	FLASH->ACR |= FLASH_ACR_LATENCY_2;
 
-	// HCLK = SYSCLK
+	// HCLK (AHBCLK) = SYSCLK/1
 	RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
 
-	// PCLK2 = HCLK
+	// PCLK2 (APB2CLK) = HCLK/1
 	RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
 
-	// PCLK1 = HCLK
-	RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+	// PCLK1 (APB1CLK) = HCLK/1
+	RCC->CFGR |= RCC_CFGR_PPRE1_DIV1;
 
-	// PLL configuration: PLLCLK = HSI/2 * 16 = 64 MHz
+	// PLL configuration: PLLCLK = HSI/2 * 9 = 36 MHz
 	RCC->CFGR &= ~RCC_CFGR_PLLSRC;
-	RCC->CFGR |= RCC_CFGR_PLLMULL16;
+	RCC->CFGR |= RCC_CFGR_PLLMULL9;
 
 	// Enable PLL
 	RCC->CR |= RCC_CR_PLLON;
@@ -35,7 +35,7 @@ void sysclk_init(void)
 	// Wait till PLL is ready
 	while((RCC->CR & RCC_CR_PLLRDY) == 0) {};
 
-	// Select PLL as system clock source
+	// Select PLL as system clock source (SYSCLK = PLLCLK)
 	RCC->CFGR &= ~RCC_CFGR_SW;
 	RCC->CFGR |= RCC_CFGR_SW_PLL;
 
