@@ -7,6 +7,6 @@
 
 void led_init(void);
 void btn_init(void);
-void led_init_pwm(void);
+void tim3_afio_init(void);
 
 #endif /* __GPIO_H */

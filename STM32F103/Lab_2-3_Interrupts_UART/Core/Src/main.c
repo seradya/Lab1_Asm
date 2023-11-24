@@ -19,9 +19,8 @@ int main(void)
   tim2_init();   // initializing TIM2
   btn_init();    // User button initializingd
   usart_init();  // USART2 initialization
-  led_init_pwm();
+  tim3_afio_init();
   tim3_pwm_init();
-  led_init_pwm();
 
   while (true)
   {
@@ -40,7 +39,6 @@ void ExecuteCommand(void)
   {
     strcpy(TxBuffer,"Serebrennikov AN\n\rDobrotinAA\n\rIU4-71B\n\r");
   }
-
   else if (strncmp(RxBuffer, "LEFT", 4) == 0)
   {
     
@@ -48,7 +46,6 @@ void ExecuteCommand(void)
     tim3_set_angle(180);
     angle = 180;
   }
-
   else if (strncmp(RxBuffer, "RIGHT", 5) == 0)
   {
     
@@ -56,7 +53,6 @@ void ExecuteCommand(void)
     tim3_set_angle(0);
     angle = 0;
   }
-
   else if (strncmp(RxBuffer, "ANG ", 4) == 0)
   {
     uint16_t ang;
@@ -80,25 +76,6 @@ void ExecuteCommand(void)
     strcat(TxBuffer, str);
     
   }
-
-  // else if(strncmp(RxBuffer, "Period", 6) == 0)
-  // {
-  //   //Period 1000
-  //   uint16_t tmp;
-  //   sscanf(RxBuffer, "%*s %hu", &tmp);
-  //   if((tmp >= 100) && (tmp <= 5000))
-  //   {
-  //     TIM2->ARR = tmp - 1;
-  //     TIM2->CNT = 0;
-  //     strcpy(TxBuffer,"Ok, period is set");
-  //   }
-  //   else
-  //   {
-  //     strcpy(TxBuffer,"Period out of range!");
-  //   }
-
-  // }
-
   else
   {
     strcpy(TxBuffer, "Unknown command!");
